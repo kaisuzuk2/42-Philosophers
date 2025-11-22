@@ -6,13 +6,13 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:37:23 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/22 12:55:18 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/22 15:30:59 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void print_error(char *label, char *msg)
+void print_error(const char *label, const char *msg)
 {
 	write(STDERR_FILENO, label, ft_strlen(label));
 	write(STDERR_FILENO, &": ", 2);

@@ -6,28 +6,28 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:09:52 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/22 15:28:35 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/22 15:29:41 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static t_bool	is_zero(long n)
+static t_bool	is_zero(const long n)
 {
 	return (n == 0);
 }
 
-static t_bool	is_overflow(long n)
+static t_bool	is_overflow(const long n)
 {
 	return (n > INT_MAX || n < INT_MIN);
 }
 
-static t_bool	is_negative(long n)
+static t_bool	is_negative(const long n)
 {
 	return (n < 0);
 }
 
-t_bool	parse_check(long *arr, size_t size)
+static t_bool	parse_check(const long *arr, size_t size)
 {
 	int	i;
 
