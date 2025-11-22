@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:09:52 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/22 15:25:24 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/22 15:28:35 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ t_bool	parse_check(long *arr, size_t size)
 t_bool	parse(char **argv, t_philo_config *p_conf)
 {
 	size_t i;
-	size_t size;
 	long int arr[CONF_SIZE];
 	int *p;
 
@@ -59,9 +58,9 @@ t_bool	parse(char **argv, t_philo_config *p_conf)
 		arr[i] = ft_atol(argv[i]);
 		i++;
 	}
-	size = i;
-	if (!parse_check(arr, size))
-		return (print_error("Error", "arguments must be positive integers"), FALSE);
+	if (!parse_check(arr, i))
+		return (print_error("Error", "arguments must be positive integers"),
+			FALSE);
 	if (!argv[MUST_EAT_ARG])
 		arr[i] = -1;
 	p = (int *)p_conf;
