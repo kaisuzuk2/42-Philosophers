@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:19:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/22 13:01:20 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/22 15:08:35 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@
 */
 #include "philo.h"
 
-
-
-static t_bool is_str_number(char *str)
+static t_bool	is_str_number(char *str)
 {
+	while (*str == '+' || *str == '-')
+		str++;
 	while (*str)
 	{
 		if (!ft_is_digit(*str))
 			return (FALSE);
 		str++;
-	}	
+	}
 	return (TRUE);
 }
 
-static t_bool valid_num(char **argv)
+static t_bool	valid_num(char **argv)
 {
 	argv++;
 	while (*argv)
@@ -42,20 +42,26 @@ static t_bool valid_num(char **argv)
 	return (TRUE);
 }
 
-static t_bool valid_arg(int argc, char **argv)
+static t_bool	valid_arg(int argc, char **argv)
 {
 	if (argc < MIN_ARG)
-		return (print_error("Error", "too few arguments"), print_usage(), FALSE);
+		return (print_error("Error", "too few arguments"), print_usage(),
+			FALSE);
 	if (argc > MAX_ARG)
-		return (print_error("Error", "too many argumants"), print_usage(), FALSE);
+		return (print_error("Error", "too many argumants"), print_usage(),
+			FALSE);
 	if (!valid_num(argv))
 		return (print_error("Error", "arguments not a number"), FALSE);
 	return (TRUE);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
+	t_philo_config conf;
+
 	if (!valid_arg(argc, argv))
+		return (1);
+	if (!parse(argv, &conf))
 		return (1);
 	return (0);
 }
