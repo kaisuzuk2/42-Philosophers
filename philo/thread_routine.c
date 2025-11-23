@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:35:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/23 14:45:10 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/24 08:51:05 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	*philo_routine(void *arg)
 void	*monitor_routine(void *arg)
 {
 	t_monitor *mon;
-	time_t tv;
-	suseconds_t tz;
 
 	mon = (t_monitor *)arg;
 	set_start_time(mon, get_ms_time());
