@@ -6,13 +6,17 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 14:30:17 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/23 14:31:06 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/23 14:45:07 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long get_time_to_long(time_t tv_sec)
+long get_ms_time(void)
 {
-	
+	time_t tv;
+	suseconds_t tz;
+
+	gettimeofday(&tv, &tz);
+	return ((tv * 1000) + (tz / 1000));
 }
