@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:19:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/22 15:08:35 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/23 10:50:55 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ int	main(int argc, char *argv[])
 		return (1);
 	if (!parse(argv, &conf))
 		return (1);
+	
 	return (0);
 }
