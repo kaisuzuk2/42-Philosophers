@@ -6,17 +6,17 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:22:57 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/23 12:24:00 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/23 14:20:50 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+# include "dispose.h"
 # include "error.h"
 # include "externs.h"
 # include "general.h"
-# include "dispose.h"
 
 # define MUST_EAT_ARG 5
 
@@ -28,6 +28,7 @@ typedef struct s_table
 	pthread_mutex_t	*m_fork;
 	pthread_mutex_t	m_print;
 	pthread_mutex_t	m_is_dead;
+	t_bool			is_dead;
 	long			start_time;
 	t_philo_config	*conf;
 }					t_table;
@@ -37,7 +38,9 @@ typedef struct s_philo
 	int				id;
 	int				l_fork;
 	int				r_fork;
+	pthread_mutex_t	m_last_eat_time;
 	long			last_eat_time;
+	pthread_mutex_t	m_eat_count;
 	int				eat_count;
 	pthread_t		thread;
 	t_table			*table;
@@ -48,6 +51,7 @@ typedef struct s_monitor
 	pthread_mutex_t	*m_fork;
 	pthread_mutex_t	m_print;
 	pthread_mutex_t	m_is_dead;
+	t_bool			is_dead;
 	long			start_time;
 	t_philo_config	*conf;
 	t_philo			*philos;
