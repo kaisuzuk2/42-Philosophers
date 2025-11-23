@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   externs.h                                          :+:      :+:    :+:   */
+/*   dispose.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/22 10:41:32 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/23 12:47:23 by kaisuzuk         ###   ########.fr       */
+/*   Created: 2025/11/23 12:21:26 by kaisuzuk          #+#    #+#             */
+/*   Updated: 2025/11/23 12:23:25 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXTERNS_H
-# define EXTERNS_H
+#include "philo.h"
 
-# include "general.h"
+void dispose_philo(t_philo *philos, int philo_num)
+{
+	int i;
 
-// valid.c
-t_bool	valid(int argc, char **argv);
-
-// parse.c
-t_bool	parse(char **argv, t_philo_config *p_conf);
-
-// init.c
-t_bool	init(t_monitor *mon, t_philo_config *conf);
-
-#endif
+	i = 0;
+	while (i < philo_num)
+	{
+		free(philos[i]);
+		i++;
+	}
+}

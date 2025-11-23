@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:22:57 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/23 10:51:26 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/23 12:24:00 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "error.h"
 # include "externs.h"
 # include "general.h"
+# include "dispose.h"
 
 # define MUST_EAT_ARG 5
 

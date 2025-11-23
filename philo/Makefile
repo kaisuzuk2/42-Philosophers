@@ -6,7 +6,7 @@
 #    By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/22 11:23:12 by kaisuzuk          #+#    #+#              #
-#    Updated: 2025/11/23 10:58:08 by kaisuzuk         ###   ########.fr        #
+#    Updated: 2025/11/23 12:48:25 by kaisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,15 @@ NAME	=	philo
 CC		=	cc
 FLAG	=	-Wall -Werror -Wextra
 
+RM		=	rm -rf
+
 SRCS	=	main.c \
 			general.c \
 			valid.c \
-			error.c \
 			parse.c \
+			init.c \
+			error.c \
+			dispose.c \
 			xmalloc.c 
 
 OBJS	=	$(SRCS:.c=.o)
@@ -32,10 +36,10 @@ $(NAME): $(OBJS)
 	$(CC) -c  $(INC) $< -o $@
 
 clean:
-	rm $(OBJS)
+	$(RM) $(OBJS)
 
 fclean: clean
-	rm $(NAME)
+	$(RM) $(NAME)
 
 re:	fclean all
 
