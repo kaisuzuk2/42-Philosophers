@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_routine.c                                   :+:      :+:    :+:   */
+/*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/23 13:35:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/23 14:25:53 by kaisuzuk         ###   ########.fr       */
+/*   Created: 2025/11/23 14:30:17 by kaisuzuk          #+#    #+#             */
+/*   Updated: 2025/11/23 14:31:06 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*philo_routine(void *arg)
+long get_time_to_long(time_t tv_sec)
 {
-	t_philo	*philo;
-
-	philo = (t_philo *)arg;
-}
-
-void	*monitor_routine(void *arg)
-{
-	t_monitor *mon;
-
-	mon = (t_monitor *)arg;
+	
 }
