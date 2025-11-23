@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   xmalloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/01 15:19:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/23 10:58:53 by kaisuzuk         ###   ########.fr       */
+/*   Created: 2025/11/23 10:55:16 by kaisuzuk          #+#    #+#             */
+/*   Updated: 2025/11/23 10:56:35 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-1) valid
-2) thread create
-3) thread join
-*/
 #include "philo.h"
 
-int	main(int argc, char *argv[])
+void	*xmalloc(size_t size)
 {
-	t_philo_config conf;
+	void *res;
 
-	if (!valid(argc, argv))
-		return (EXIT_FAILUE);
-	if (!parse(argv, &conf))
-		return (EXIT_FAILUE);
-	
-	return (EXIT_SUCCESS);
+	res = malloc(size);
+	if (!res)
+		return (print_error("SYSERROR", "malloc failed"), NULL);
+	return (res);
 }

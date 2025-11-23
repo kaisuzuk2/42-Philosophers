@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:22:57 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/23 10:50:19 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/23 10:51:26 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@
 # include "externs.h"
 # include "general.h"
 
-// # define PHILO_ARG 1
-// # define DIE_ARG 2
-// # define EAT_ARG 3
-// # define SLEEP_ARG 4
 # define MUST_EAT_ARG 5
 
 # define MIN_ARG 5

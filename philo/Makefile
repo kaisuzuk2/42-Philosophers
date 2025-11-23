@@ -6,7 +6,7 @@
 #    By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/22 11:23:12 by kaisuzuk          #+#    #+#              #
-#    Updated: 2025/11/22 15:08:50 by kaisuzuk         ###   ########.fr        #
+#    Updated: 2025/11/23 10:58:08 by kaisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,10 @@ FLAG	=	-Wall -Werror -Wextra
 
 SRCS	=	main.c \
 			general.c \
+			valid.c \
 			error.c \
-			parse.c
+			parse.c \
+			xmalloc.c 
 
 OBJS	=	$(SRCS:.c=.o)
 
