@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:22:57 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/22 15:09:14 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/23 10:29:03 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define PHILO_H
 
 # include "error.h"
-# include "general.h"
 # include "externs.h"
+# include "general.h"
 
 # define PHILO_ARG 1
 # define DIE_ARG 2
@@ -26,10 +26,34 @@
 # define MIN_ARG 5
 # define MAX_ARG 6
 
-typedef struct s_err_msg
+typedef struct s_monitor
 {
-	char	*label;
-	char	*msg;
-}			t_err_msg;
+	pthread_mutex_t	*m_fork;
+	pthread_mutex_t	m_print;
+	pthread_mutex_t	m_is_dead;
+	long			start_time;
+	t_philo_config	*conf;
+	t_philo			*philos;
+}					t_monitor;
+
+typedef struct s_table
+{
+	pthread_mutex_t	*m_fork;
+	pthread_mutex_t	m_print;
+	pthread_mutex_t	m_is_dead;
+	long			start_time;
+	t_philo_config	*conf;
+}					t_table;
+
+typedef struct s_philo
+{
+	int				id;
+	int				l_fork;
+	int				r_fork;
+	long			last_eat_time;
+	int				eat_count;
+	pthread_t		thread;
+	t_table			*table;
+}					t_philo;
 
 #endif
