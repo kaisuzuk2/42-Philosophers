@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:42:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/23 10:56:56 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/23 13:41:29 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <limits.h>
 # include <pthread.h>
 # include <unistd.h>
+# include <sys/time.h>
 
 typedef int	t_bool;
 # define TRUE 1

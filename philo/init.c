@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:46:48 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/23 12:47:10 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/23 13:19:32 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	init_philos(t_philo *philos, t_table *table, const int philo_num)
 		philos->id = i;
 		philos->l_fork = i;
 		philos->r_fork = (i + 1) % philo_num;
-		philos->last_eat_time = -1;
 		philos->eat_count = 0;
 		philos->table = table;
 		philos++;
@@ -32,7 +31,14 @@ static void	init_philos(t_philo *philos, t_table *table, const int philo_num)
 
 static void	init_mutex(t_monitor *mon)
 {
-	pthread_mutex_init(mon->m_fork, NULL);
+	int i;
+
+	i = 0;
+	while (i < mon->conf->n_philo)
+	{
+		pthread_mutex_init(&mon->m_fork[i], NULL);
+		i++;
+	}
 	pthread_mutex_init(&mon->m_print, NULL);
 	pthread_mutex_init(&mon->m_is_dead, NULL);
 }

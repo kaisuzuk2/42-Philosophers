@@ -6,7 +6,7 @@
 #    By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/22 11:23:12 by kaisuzuk          #+#    #+#              #
-#    Updated: 2025/11/23 12:48:25 by kaisuzuk         ###   ########.fr        #
+#    Updated: 2025/11/23 13:39:25 by kaisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SRCS	=	main.c \
 			valid.c \
 			parse.c \
 			init.c \
+			thread_routine.c \
+			set.c \
 			error.c \
 			dispose.c \
 			xmalloc.c 

@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   thread_routine.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/01 15:19:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/23 13:36:29 by kaisuzuk         ###   ########.fr       */
+/*   Created: 2025/11/23 13:35:27 by kaisuzuk          #+#    #+#             */
+/*   Updated: 2025/11/23 13:37:21 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-1) valid
-2) thread create
-3) thread join
-*/
 #include "philo.h"
 
-int	main(int argc, char *argv[])
+void	*philo_routine(void *arg)
 {
-	t_philo_config	conf;
-	t_monitor		mon;
+	t_philo	*philo;
 
-	if (!valid(argc, argv))
-		return (EXIT_FAILUE);
-	if (!parse(argv, &conf))
-		return (EXIT_FAILUE);
-	if (!init(&mon, &conf))
-		return (EXIT_FAILUE);
-	return (EXIT_SUCCESS);
+	philo = (t_philo *)arg;
+}
+
+void	*monitor_routine(void *arg)
+{
+	t_monitor *mon;
+
+	mon = (t_monitor *)arg;
 }
