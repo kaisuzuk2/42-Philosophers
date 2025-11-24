@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:41:32 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/24 09:05:17 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/24 11:15:13 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ t_bool	init(t_monitor *mon, t_philo_config *conf);
 /*                        thread                         */
 /*                                                                 */
 /*-----------------------------------------------------------------*/
+
+// rthread_routine.c
+void	*philo_routine(void *arg);
+void	*monitor_routine(void *arg);
 
 /*-----------------------------------------------------------------*/
 /*                                                                 */

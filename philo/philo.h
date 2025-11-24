@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:22:57 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/24 08:51:57 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/24 11:46:05 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,8 @@
 
 # define MIN_ARG 5
 # define MAX_ARG 6
+
+# define MONITOR 1
+# define PHILO 0
 
 #endif

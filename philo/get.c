@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 14:30:17 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/24 09:16:41 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/24 11:18:09 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_bool get_is_dead(t_philo *philo)
 	pthread_mutex_lock(&philo->table->m_is_dead);
 	res = philo->table->is_dead;
 	pthread_mutex_unlock(&philo->table->m_is_dead);
+	return (res);
 }
 
 

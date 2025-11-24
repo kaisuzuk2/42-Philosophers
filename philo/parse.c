@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:09:52 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/22 15:29:41 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/24 11:19:36 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_bool	is_negative(const long n)
 
 static t_bool	parse_check(const long *arr, size_t size)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < size)

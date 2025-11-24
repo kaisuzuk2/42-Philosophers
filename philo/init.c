@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:46:48 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/24 09:00:50 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/24 12:42:37 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ t_bool	init(t_monitor *mon, t_philo_config *conf)
 	philos = (t_philo *)xmalloc(sizeof(t_philo) * conf->n_philo);
 	if (!philos)
 		return (FALSE);
-	if (init_monitor(mon, philos, conf))
+	if (!init_monitor(mon, philos, conf))
 		return (free(philos), FALSE);
-	init_philos(philos, (t_table *)&mon, conf->n_philo);
+	init_philos(philos, (t_table *)mon, conf->n_philo);
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:42:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/24 09:04:37 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/24 11:21:46 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 # include <limits.h>
 # include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
-# include <stdlib.h>
 
 typedef int			t_bool;
 # define TRUE 1
@@ -69,6 +70,7 @@ typedef struct s_monitor
 	long			start_time;
 	t_philo_config	*conf;
 	t_philo			*philos;
+	pthread_t		thread;
 }					t_monitor;
 
 size_t				ft_strlen(const char *s);
