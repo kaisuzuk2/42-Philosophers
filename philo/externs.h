@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:41:32 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/24 14:47:44 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/24 15:39:15 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ void	set_last_eat_time(t_philo *philo, long time);
 
 // get.c
 long	get_ms_time(void);
+t_bool	get_is_timeout_died(const long last_eat_time, const int time_to_died);
+long	get_last_eat_time(t_philo *philo);
 
 #endif
