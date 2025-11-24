@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:19:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/24 12:30:12 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/24 12:45:43 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,27 @@ void	join_thread(t_monitor *mon, t_bool is_monitor)
 	}
 }
 
+void	destroy_mutex(t_monitor *mon)
+{
+	int i;
+	
+	i = 0;
+	while (i < mon->conf->n_philo)
+	{
+		pthread_mutex_destroy(&mon->m_fork[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&mon->m_is_dead);
+	pthread_mutex_destroy(&mon->m_print);
+	i = 0;
+	while (i < mon->conf->n_philo)
+	{
+		pthread_mutex_destroy(&mon->philos[i].m_eat_count);
+		pthread_mutex_destroy(&mon->philos[i].m_last_eat_time);
+		i++;
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	t_philo_config	conf;
@@ -68,22 +89,7 @@ int	main(int argc, char *argv[])
 	create_thread(&mon, PHILO);
 	join_thread(&mon, MONITOR);
 	join_thread(&mon, PHILO);
-	
-	i = 0;
-	while (i < conf.n_philo)
-	{
-		pthread_mutex_destroy(&mon.m_fork[i]);
-		i++;
-	}
-	pthread_mutex_destroy(&mon.m_is_dead);
-	pthread_mutex_destroy(&mon.m_print);
-	i = 0;
-	while (i < conf.n_philo)
-	{
-		pthread_mutex_destroy(&mon.philos[i].m_eat_count);
-		pthread_mutex_destroy(&mon.philos[i].m_last_eat_time);
-		i++;
-	}
+	destroy_mutex(&mon);
 	free(mon.philos);
 	free(mon.m_fork);
 	return (EXIT_SUCCESS);
