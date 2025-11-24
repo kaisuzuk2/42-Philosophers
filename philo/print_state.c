@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   print_state.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/01 09:22:57 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/24 14:33:12 by kaisuzuk         ###   ########.fr       */
+/*   Created: 2025/11/24 14:00:59 by kaisuzuk          #+#    #+#             */
+/*   Updated: 2025/11/24 14:47:56 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "philo.h"
 
-# include "dispose.h"
-# include "error.h"
-# include "externs.h"
-# include "general.h"
-
-# define MUST_EAT_ARG 5
-
-# define MIN_ARG 5
-# define MAX_ARG 6
-
-# define MONITOR 1
-# define PHILO 0
-
-# define ST_FORK "has taken a fork"
-# define ST_EAT "is eating"
-# define ST_SLEEP "is sleeping"
-# define ST_THINK "is thinking"
-# define ST_DIED "died"
-
-#endif
+void	print_state(t_philo *philo, const char *state)
+{
+	pthread_mutex_lock(&philo->table->m_print);
+	printf("%d %s\n", philo->id, status);
+	pthread_mutex_unlock(&philo->table->m_print);
+}

@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:42:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/24 11:21:46 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:29:19 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ typedef struct s_table
 {
 	pthread_mutex_t	*m_fork;
 	pthread_mutex_t	m_print;
-	pthread_mutex_t	m_is_dead;
-	t_bool			is_dead;
+	pthread_mutex_t	m_is_died;
+	t_bool			is_died;
 	long			start_time;
 	t_philo_config	*conf;
 }					t_table;
@@ -65,8 +65,8 @@ typedef struct s_monitor
 {
 	pthread_mutex_t	*m_fork;
 	pthread_mutex_t	m_print;
-	pthread_mutex_t	m_is_dead;
-	t_bool			is_dead;
+	pthread_mutex_t	m_is_died;
+	t_bool			is_died;
 	long			start_time;
 	t_philo_config	*conf;
 	t_philo			*philos;

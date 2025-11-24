@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:41:32 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/24 11:15:13 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:47:44 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ t_bool	init(t_monitor *mon, t_philo_config *conf);
 /*                                                                 */
 /*-----------------------------------------------------------------*/
 
+// print_state.c
+void	print_state(t_philo *philo, const char *state);
+
 // rthread_routine.c
 void	*philo_routine(void *arg);
 void	*monitor_routine(void *arg);
@@ -48,7 +51,7 @@ void	*monitor_routine(void *arg);
 
 // set.c
 void	set_start_time(t_monitor *mon, long time);
-void	set_dead_flg(t_monitor *mon);
+void	set_died_flg(t_monitor *mon);
 void	set_eat_count(t_philo *philo);
 void	set_last_eat_time(t_philo *philo, long time);
 

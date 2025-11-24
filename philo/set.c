@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:39:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/23 14:30:03 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:30:15 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	set_eat_count(t_philo *philo)
 	pthread_mutex_unlock(&philo->m_eat_count);
 }
 
-void	set_dead_flg(t_monitor *mon)
+void	set_died_flg(t_monitor *mon)
 {
-	pthread_mutex_lock(&mon->m_is_dead);
-	mon->is_dead = TRUE;
-	pthread_mutex_unlock(&mon->m_is_dead);
+	pthread_mutex_lock(&mon->m_is_died);
+	mon->is_died = TRUE;
+	pthread_mutex_unlock(&mon->m_is_died);
 }
 
 void	set_start_time(t_monitor *mon, long time)

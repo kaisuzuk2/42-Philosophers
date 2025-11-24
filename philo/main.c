@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:19:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/24 12:45:43 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:34:51 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ void	join_thread(t_monitor *mon, t_bool is_monitor)
 
 void	destroy_mutex(t_monitor *mon)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (i < mon->conf->n_philo)
 	{
 		pthread_mutex_destroy(&mon->m_fork[i]);
 		i++;
 	}
-	pthread_mutex_destroy(&mon->m_is_dead);
+	pthread_mutex_destroy(&mon->m_is_died);
 	pthread_mutex_destroy(&mon->m_print);
 	i = 0;
 	while (i < mon->conf->n_philo)
@@ -73,11 +73,22 @@ void	destroy_mutex(t_monitor *mon)
 	}
 }
 
+int	execute_thread(t_monitor *mon)
+{
+	create_thread(mon, MONITOR);
+	create_thread(mon, PHILO);
+	join_thread(mon, MONITOR);
+	join_thread(mon, PHILO);
+	destroy_mutex(mon);
+	free(mon->philos);
+	free(mon->m_fork);
+	return (EXIT_SUCCESS);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_philo_config	conf;
 	t_monitor		mon;
-	int				i;
 
 	if (!valid(argc, argv))
 		return (EXIT_FAILUE);
@@ -85,12 +96,5 @@ int	main(int argc, char *argv[])
 		return (EXIT_FAILUE);
 	if (!init(&mon, &conf))
 		return (EXIT_FAILUE);
-	create_thread(&mon, MONITOR);
-	create_thread(&mon, PHILO);
-	join_thread(&mon, MONITOR);
-	join_thread(&mon, PHILO);
-	destroy_mutex(&mon);
-	free(mon.philos);
-	free(mon.m_fork);
-	return (EXIT_SUCCESS);
+	return (execute_thread(&mon));
 }

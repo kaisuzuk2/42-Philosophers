@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:46:48 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/24 12:42:37 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:29:50 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	init_monitor_mutex(t_monitor *mon)
 		i++;
 	}
 	pthread_mutex_init(&mon->m_print, NULL);
-	pthread_mutex_init(&mon->m_is_dead, NULL);
+	pthread_mutex_init(&mon->m_is_died, NULL);
 }
 
 static t_bool	init_monitor(t_monitor *mon, t_philo *philos,
@@ -57,7 +57,7 @@ static t_bool	init_monitor(t_monitor *mon, t_philo *philos,
 	mon->m_fork = fork_arr;
 	mon->conf = conf;
 	mon->philos = philos;
-	mon->is_dead = FALSE;
+	mon->is_died = FALSE;
 	init_monitor_mutex(mon);
 	return (TRUE);
 }
