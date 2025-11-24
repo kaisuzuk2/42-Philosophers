@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 14:30:17 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/23 14:45:07 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/24 09:09:21 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 long get_ms_time(void)
 {
-	time_t tv;
-	suseconds_t tz;
+	struct timeval tv;
 
-	gettimeofday(&tv, &tz);
-	return ((tv * 1000) + (tz / 1000));
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
