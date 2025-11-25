@@ -6,34 +6,34 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:39:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/25 10:18:59 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:30:37 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	set_last_eat_time(t_philo *philo, long time)
+void	set_last_eat_time(t_atomic_long *last_eat_time, long time)
 {
-	pthread_mutex_lock(&philo->last_eat_time.lock);
-	philo->last_eat_time.value = time;
-	pthread_mutex_unlock(&philo->last_eat_time.lock);
+	pthread_mutex_lock(&last_eat_time->lock);
+	last_eat_time->value = time;
+	pthread_mutex_unlock(&last_eat_time->lock);
 }
 
-void	set_eat_count(t_philo *philo)
+void	set_eat_count(t_atomic_int *eat_count)
 {
-	pthread_mutex_lock(&philo->eat_count.lock);
-	philo->eat_count.value++;
-	pthread_mutex_unlock(&philo->eat_count.lock);
+	pthread_mutex_lock(&eat_count->lock);
+	eat_count->value++;
+	pthread_mutex_unlock(&eat_count->lock);
 }
 
-void	set_died_flg(t_monitor *mon)
+void	set_died_flg(t_atomic_bool *is_died)
 {
-	pthread_mutex_lock(&mon->is_died.lock);
-	mon->is_died.is_flg = TRUE;
-	pthread_mutex_unlock(&mon->is_died.lock);
+	pthread_mutex_lock(&is_died->lock);
+	is_died->is_flg = TRUE;
+	pthread_mutex_unlock(&is_died->lock);
 }
 
-void	set_start_time(t_monitor *mon, long time)
+void	set_start_time(long *start_time, long time)
 {
-	mon->start_time = time;
+	*start_time = time;
 }

@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:46:48 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/25 10:15:11 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:25:40 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static t_bool	init_monitor(t_monitor *mon, t_philo *philos,
 	mon->fork_lock = fork_arr;
 	mon->conf = conf;
 	mon->philos = philos;
-	mon->is_died = FALSE;
+	mon->is_died.is_flg = FALSE;
 	init_monitor_mutex(mon);
 	return (TRUE);
 }

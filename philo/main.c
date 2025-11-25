@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:19:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/25 10:15:54 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:34:39 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	destroy_mutex(t_monitor *mon)
 		i++;
 	}
 	pthread_mutex_destroy(&mon->is_died.lock);
-	pthread_mutex_destroy(&mon->print.lock);
+	pthread_mutex_destroy(&mon->print_lock);
 	i = 0;
 	while (i < mon->conf->n_philo)
 	{

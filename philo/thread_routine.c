@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:35:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/25 10:14:12 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:35:17 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ void	*philo_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	set_last_eat_time(philo, philo->table->start_time);
+	set_last_eat_time(&philo->last_eat_time, philo->table->start_time);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->table->fork_lock[philo->l_fork]);
 		pthread_mutex_lock(&philo->table->fork_lock[philo->r_fork]);
 		print_state(philo, ST_FORK);
-		set_last_eat_time(philo, get_ms_time());
+		set_last_eat_time(&philo->last_eat_time, get_ms_time());
+		set_eat_count(&philo->eat_count);
 		print_state(philo, ST_EAT);
 		usleep(philo->table->conf->time_to_eat);
 		pthread_mutex_unlock(&philo->table->fork_lock[philo->l_fork]);
@@ -59,10 +60,10 @@ void	*monitor_routine(void *arg)
 		i = 0;
 		while (i < mon->conf->n_philo)
 		{
-			if (get_is_timeout_died(get_last_eat_time(&mon->philos[i]),
+			if (get_is_timeout_died(get_last_eat_time(&mon->philos[i].last_eat_time),
 					mon->conf->time_to_die))
 			{
-				set_died_flg(mon);
+				set_died_flg(&mon->is_died);
 				print_state(&mon->philos[i], ST_DIED);
 				break ;
 			}
