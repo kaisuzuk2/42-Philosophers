@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:42:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/24 14:50:43 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:13:04 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,24 @@ typedef int			t_bool;
 
 # define CONF_SIZE 5
 
+typedef struct s_atomic_bool
+{
+	pthread_mutex_t	lock;
+	t_bool			is_flg;
+}					t_atomic_bool;
+
+typedef struct s_atomic_long
+{
+	pthread_mutex_t	lock;
+	long			value;
+}					t_atomic_long;
+
+typedef struct s_atomic_int
+{
+	pthread_mutex_t	lock;
+	int				value;
+}					t_atomic_int;
+
 typedef struct s_philo_config
 {
 	int				n_philo;
@@ -41,10 +59,9 @@ typedef struct s_philo_config
 
 typedef struct s_table
 {
-	pthread_mutex_t	*m_fork;
-	pthread_mutex_t	m_print;
-	pthread_mutex_t	m_is_died;
-	t_bool			is_died;
+	pthread_mutex_t	*fork_lock;
+	pthread_mutex_t	print_lock;
+	t_atomic_bool	is_died;
 	long			start_time;
 	t_philo_config	*conf;
 }					t_table;
@@ -54,20 +71,17 @@ typedef struct s_philo
 	int				id;
 	int				l_fork;
 	int				r_fork;
-	pthread_mutex_t	m_last_eat_time;
-	long			last_eat_time;
-	pthread_mutex_t	m_eat_count;
-	int				eat_count;
+	t_atomic_long	last_eat_time;
+	t_atomic_int	eat_count;
 	pthread_t		thread;
 	t_table			*table;
 }					t_philo;
 
 typedef struct s_monitor
 {
-	pthread_mutex_t	*m_fork;
-	pthread_mutex_t	m_print;
-	pthread_mutex_t	m_is_died;
-	t_bool			is_died;
+	pthread_mutex_t	*fork_lock;
+	pthread_mutex_t	print_lock;
+	t_atomic_bool	is_died;
 	long			start_time;
 	t_philo_config	*conf;
 	t_philo			*philos;

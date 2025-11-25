@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:19:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/24 14:34:51 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/25 10:15:54 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,16 @@ void	destroy_mutex(t_monitor *mon)
 	i = 0;
 	while (i < mon->conf->n_philo)
 	{
-		pthread_mutex_destroy(&mon->m_fork[i]);
+		pthread_mutex_destroy(&mon->fork_lock[i]);
 		i++;
 	}
-	pthread_mutex_destroy(&mon->m_is_died);
-	pthread_mutex_destroy(&mon->m_print);
+	pthread_mutex_destroy(&mon->is_died.lock);
+	pthread_mutex_destroy(&mon->print.lock);
 	i = 0;
 	while (i < mon->conf->n_philo)
 	{
-		pthread_mutex_destroy(&mon->philos[i].m_eat_count);
-		pthread_mutex_destroy(&mon->philos[i].m_last_eat_time);
+		pthread_mutex_destroy(&mon->philos[i].eat_count.lock);
+		pthread_mutex_destroy(&mon->philos[i].last_eat_time.lock);
 		i++;
 	}
 }
@@ -81,7 +81,7 @@ int	execute_thread(t_monitor *mon)
 	join_thread(mon, PHILO);
 	destroy_mutex(mon);
 	free(mon->philos);
-	free(mon->m_fork);
+	free(mon->fork_lock);
 	return (EXIT_SUCCESS);
 }
 
