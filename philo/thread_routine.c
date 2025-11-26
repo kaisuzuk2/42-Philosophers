@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:35:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/26 10:07:53 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:22:58 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,26 @@ void	*philo_routine(void *arg)
 		if (get_is_died(&philo->table->is_died))
 			return (NULL);
 		pthread_mutex_lock(&philo->table->fork_lock[philo->l_fork]);
+		print_state(philo, ST_FORK);
 		pthread_mutex_lock(&philo->table->fork_lock[philo->r_fork]);
 		print_state(philo, ST_FORK);
 		set_last_eat_time(&philo->last_eat_time, get_ms_time());
-		set_eat_count(&philo->eat_count);
+		if (get_is_died(&philo->table->is_died))
+		{
+			pthread_mutex_unlock(&philo->table->fork_lock[philo->l_fork]);
+			pthread_mutex_unlock(&philo->table->fork_lock[philo->r_fork]);
+			return (NULL);
+		}
 		print_state(philo, ST_EAT);
 		usleep(philo->table->conf->time_to_eat);
+		set_eat_count(&philo->eat_count);
 		pthread_mutex_unlock(&philo->table->fork_lock[philo->l_fork]);
 		pthread_mutex_unlock(&philo->table->fork_lock[philo->r_fork]);
 		if (get_is_died(&philo->table->is_died))
 			return (NULL);
+		if (is_must_eat)
+			if (get_is_done_eating(&philo->eat_count, philo->table->conf->must_eat))
+				return (NULL);
 		print_state(philo, ST_SLEEP);
 		usleep(philo->table->conf->time_to_sleep);
 		if (get_is_died(&philo->table->is_died))

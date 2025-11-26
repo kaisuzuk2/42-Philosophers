@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:41:32 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/25 11:19:07 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:25:47 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ t_bool			get_is_timeout_died(const long last_eat_time,
 					const int time_to_died);
 long			get_last_eat_time(t_atomic_long *last_eat_time);
 t_bool			get_is_died(t_atomic_bool *is_died);
+t_bool			get_is_done_eating(t_atomic_int *eat_count, int must_eat);
 
 #endif
