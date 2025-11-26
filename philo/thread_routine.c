@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:35:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/26 10:53:40 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/26 11:39:35 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ monitor_routine
 
 static t_bool	do_eat(t_philo *philo, t_bool is_must_eat)
 {
-	if (get_is_died(&philo->table->is_died))
+	if (is_died(&philo->table->is_died))
 		return (FALSE);
 	pthread_mutex_lock(&philo->table->fork_lock[philo->l_fork]);
 	print_state(philo, ST_FORK);
 	pthread_mutex_lock(&philo->table->fork_lock[philo->r_fork]);
 	print_state(philo, ST_FORK);
-	set_last_eat_time(&philo->last_eat_time, get_ms_time());
-	if (get_is_died(&philo->table->is_died))
+	set_last_eat_time(&philo->last_eat_time, get_current_mstime());
+	if (is_died(&philo->table->is_died))
 	{
 		pthread_mutex_unlock(&philo->table->fork_lock[philo->l_fork]);
 		pthread_mutex_unlock(&philo->table->fork_lock[philo->r_fork]);
@@ -44,12 +44,17 @@ static t_bool	do_eat(t_philo *philo, t_bool is_must_eat)
 	set_eat_count(&philo->eat_count);
 	pthread_mutex_unlock(&philo->table->fork_lock[philo->l_fork]);
 	pthread_mutex_unlock(&philo->table->fork_lock[philo->r_fork]);
-	if (get_is_died(&philo->table->is_died))
+	if (is_died(&philo->table->is_died))
 		return (FALSE);
 	if (is_must_eat)
-		if (get_is_done_eating(&philo->eat_count, philo->table->conf->must_eat))
+		if (is_done_eating(&philo->eat_count, philo->table->conf->must_eat))
 			return (FALSE);
 	return (TRUE);
+}
+
+static t_bool do_rest(unsigned int rest_time, const char *msg)
+{
+
 }
 
 void	*philo_routine(void *arg)
@@ -66,7 +71,7 @@ void	*philo_routine(void *arg)
 			return (NULL);
 		print_state(philo, ST_SLEEP);
 		usleep(philo->table->conf->time_to_sleep);
-		if (get_is_died(&philo->table->is_died))
+		if (is_died(&philo->table->is_died))
 			return (NULL);
 		print_state(philo, ST_THINK);
 		usleep(philo->table->conf->time_to_think);
@@ -85,7 +90,7 @@ void	*monitor_routine(void *arg)
 		i = 0;
 		while (i < mon->conf->n_philo)
 		{
-			if (get_is_timeout_died(get_last_eat_time(&mon->philos[i].last_eat_time),
+			if (is_timeout_died(get_last_eat_time(&mon->philos[i].last_eat_time),
 					mon->conf->time_to_die))
 			{
 				set_died_flg(&mon->is_died);
