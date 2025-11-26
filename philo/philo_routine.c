@@ -6,17 +6,27 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 13:36:13 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/26 13:36:32 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/26 14:46:10 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	take_fork(t_philo *philo)
+static void	take_forks(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->table->fork_lock[philo->l_fork]);
+	pthread_mutex_t	*first_fork;
+	pthread_mutex_t	*second_fork;
+
+	first_fork = &philo->table->fork_lock[philo->r_fork];
+	second_fork = &philo->table->fork_lock[philo->l_fork];
+	if (philo->id % 2)
+	{
+		first_fork = &philo->table->fork_lock[philo->l_fork];
+		second_fork = &philo->table->fork_lock[philo->r_fork];
+	}
+	pthread_mutex_lock(first_fork);
 	print_state(philo, ST_FORK);
-	pthread_mutex_lock(&philo->table->fork_lock[philo->r_fork]);
+	pthread_mutex_lock(second_fork);
 	print_state(philo, ST_FORK);
 }
 
@@ -30,7 +40,7 @@ static t_bool	do_eat(t_philo *philo, t_bool is_must_eat)
 {
 	if (is_died(&philo->table->is_died))
 		return (FALSE);
-	take_fork(philo);
+	take_forks(philo);
 	set_last_eat_time(&philo->last_eat_time, get_current_mstime());
 	if (is_died(&philo->table->is_died))
 	{
