@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 09:22:57 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/24 14:33:12 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/26 11:40:02 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@
 # define ST_SLEEP "is sleeping"
 # define ST_THINK "is thinking"
 # define ST_DIED "died"
+# define ST_FIN "is finished"
 
 #endif

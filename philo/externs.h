@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:41:32 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/26 11:39:26 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/26 11:53:16 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void			*monitor_routine(void *arg);
 
 // thread_routine_utils.c
 void			print_state(t_philo *philo, const char *state);
-unsigned int	ms_to_micro(int ms_time);
 
 /*-----------------------------------------------------------------*/
 /*                                                                 */
@@ -59,12 +58,12 @@ void			set_last_eat_time(t_atomic_long *last_eat_time, long time);
 // get.c
 long			get_current_mstime(void);
 long			get_last_eat_time(t_atomic_long *last_eat_time);
+long			get_time_stamp(const start_time);
 
 // check.c
 t_bool			is_died(t_atomic_bool *is_died);
 t_bool			is_done_eating(t_atomic_int *eat_count, int must_eat);
 t_bool			is_timeout_died(const long last_eat_time,
 					const int time_to_died);
-
 
 #endif
