@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:19:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/25 10:34:39 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/26 13:02:43 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ int	main(int argc, char *argv[])
 		return (EXIT_FAILUE);
 	if (!init(&mon, &conf))
 		return (EXIT_FAILUE);
+	set_start_time(&mon.start_time, get_current_mstime());
 	return (execute_thread(&mon));
 }

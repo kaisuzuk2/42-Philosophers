@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:41:32 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/26 11:53:16 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/26 12:05:26 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void			set_last_eat_time(t_atomic_long *last_eat_time, long time);
 // get.c
 long			get_current_mstime(void);
 long			get_last_eat_time(t_atomic_long *last_eat_time);
-long			get_time_stamp(const start_time);
+long			get_time_stamp(const long start_time);
 
 // check.c
 t_bool			is_died(t_atomic_bool *is_died);
