@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:35:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/27 13:09:45 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/27 13:19:04 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,20 @@ static t_bool	check_timeout_died(t_monitor *mon)
 	return (FALSE);
 }
 
+static t_bool check_must_eat(t_philo *philos, const int n_philo, const int must_eat)
+{
+	int i;
+
+	i = 0;
+	while (i < n_philo)
+	{
+		if (!is_done_eating(&philos[i].eat_count, must_eat))
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
+
 void	*monitor_routine(void *arg)
 {
 	t_monitor *mon;
@@ -52,7 +66,8 @@ void	*monitor_routine(void *arg)
 	{
 		if (check_timeout_died(mon))
 			return (NULL);
-		
+		if (check_must_eat(mon->philos, mon->conf->n_philo, mon->conf->must_eat))
+			return (NULL);
 		usleep(DF_SLEEP);
 	}
 	return (NULL);
