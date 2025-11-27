@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 13:36:13 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/27 10:18:12 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/27 12:56:05 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,11 @@ static t_bool	do_eat(t_philo *philo, t_bool is_must_eat)
 	return (TRUE);
 }
 
-static t_bool	do_rest(t_philo *philo, unsigned int rest_time,
-		const char *state)
+static t_bool	do_sleep(t_philo *philo, unsigned int rest_time)
 {
 	if (is_died(&philo->table->is_died))
 		return (FALSE);
-	print_state(philo, state);
+	print_state(philo, ST_SLEEP);
 	sleep_until(rest_time);
 	return (TRUE);
 }
@@ -75,16 +74,16 @@ void	*philo_routine(void *arg)
 	t_bool	is_must_eat;
 
 	philo = (t_philo *)arg;
-	is_must_eat = philo->table->conf->must_eat != -1;
-	set_last_eat_time(&philo->last_eat_time, philo->table->start_time);
+	is_must_eat = philo->table->conf->must_eat != NOT_SET;
 	while (1)
 	{
 		if (!do_eat(philo, is_must_eat))
 			return (NULL);
-		if (!do_rest(philo, philo->table->conf->time_to_sleep, ST_SLEEP))
+		if (!do_sleep(philo, philo->table->conf->time_to_sleep))
 			return (NULL);
-		if (!do_rest(philo, philo->table->conf->time_to_think, ST_THINK))
+		if (is_died(&philo->table->is_died))
 			return (NULL);
+		print_state(philo, ST_THINK);
 	}
 	return (NULL);
 }

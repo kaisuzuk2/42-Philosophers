@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:00:59 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/27 10:43:12 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/27 12:55:46 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	sleep_until(const int end_time_ms)
 
 	end = get_current_mstime() + end_time_ms;
 	while (get_current_mstime() < end)
-		usleep(100);
+		usleep(DF_SLEEP);
 }
