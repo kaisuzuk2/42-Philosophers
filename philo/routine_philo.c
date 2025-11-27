@@ -6,13 +6,19 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 13:36:13 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/27 14:09:18 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/27 15:39:30 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	take_forks(t_philo *philo)
+static void	release_forks(t_philo *philo)
+{
+	pthread_mutex_unlock(&philo->table->fork_lock[philo->l_fork]);
+	pthread_mutex_unlock(&philo->table->fork_lock[philo->r_fork]);
+}
+
+static t_bool	take_forks(t_philo *philo)
 {
 	pthread_mutex_t	*first_fork;
 	pthread_mutex_t	*second_fork;
@@ -25,15 +31,20 @@ static void	take_forks(t_philo *philo)
 		second_fork = &philo->table->fork_lock[philo->r_fork];
 	}
 	pthread_mutex_lock(first_fork);
+	if (is_died(&philo->table->is_died))
+	{
+		pthread_mutex_unlock(first_fork);
+		return (FALSE);
+	}
 	print_state(philo, ST_FORK);
+	if (is_died(&philo->table->is_died))
+	{
+		release_forks(philo);
+		return (FALSE);
+	}
 	pthread_mutex_lock(second_fork);
 	print_state(philo, ST_FORK);
-}
-
-static void	release_forks(t_philo *philo)
-{
-	pthread_mutex_unlock(&philo->table->fork_lock[philo->l_fork]);
-	pthread_mutex_unlock(&philo->table->fork_lock[philo->r_fork]);
+	return (TRUE);
 }
 
 static t_bool	do_eat(t_philo *philo, t_bool is_must_eat)
@@ -75,10 +86,8 @@ void	*philo_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	is_must_eat = philo->table->conf->must_eat != NOT_SET;
-
 	if (philo->l_fork == philo->r_fork)
 		return (NULL);
-		
 	while (1)
 	{
 		if (!do_eat(philo, is_must_eat))
