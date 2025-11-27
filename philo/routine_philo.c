@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 13:36:13 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/27 13:01:54 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/27 14:09:18 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ void	*philo_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	is_must_eat = philo->table->conf->must_eat != NOT_SET;
+
+	if (philo->l_fork == philo->r_fork)
+		return (NULL);
+		
 	while (1)
 	{
 		if (!do_eat(philo, is_must_eat))

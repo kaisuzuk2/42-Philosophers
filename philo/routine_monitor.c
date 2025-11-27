@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:35:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/27 13:21:28 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/27 14:01:23 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ void	*monitor_routine(void *arg)
 	mon = (t_monitor *)arg;
 	while (1)
 	{
+		if (mon->conf->n_philo == 1)
+		{
+			print_state(&mon->philos[0], ST_DIED);
+			return (NULL);
+		}
 		if (check_timeout_died(mon))
 			return (NULL);
 		if (check_must_eat(mon->philos, mon->conf->n_philo,
