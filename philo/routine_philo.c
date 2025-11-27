@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 13:36:13 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/28 08:29:15 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/28 08:29:56 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static t_bool	take_forks(t_philo *philo)
 		return (FALSE);
 	}
 	print_state(philo, ST_FORK);
+	pthread_mutex_lock(second_fork);
 	if (is_died(&philo->table->is_died))
 	{
 		release_forks(philo);
 		return (FALSE);
 	}
-	pthread_mutex_lock(second_fork);
 	print_state(philo, ST_FORK);
 	return (TRUE);
 }
