@@ -6,13 +6,13 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:39:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/25 10:30:37 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/27 10:32:49 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	set_last_eat_time(t_atomic_long *last_eat_time, long time)
+void	set_last_eat_time(t_atomic_long *last_eat_time, long long time)
 {
 	pthread_mutex_lock(&last_eat_time->lock);
 	last_eat_time->value = time;
@@ -33,7 +33,7 @@ void	set_died_flg(t_atomic_bool *is_died)
 	pthread_mutex_unlock(&is_died->lock);
 }
 
-void	set_start_time(long *start_time, long time)
+void	set_start_time(long long *start_time)
 {
-	*start_time = time;
+	*start_time = get_current_mstime();
 }

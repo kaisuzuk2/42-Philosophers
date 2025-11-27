@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:19:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/26 13:02:43 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/27 10:42:31 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,14 @@ int	main(int argc, char *argv[])
 		return (EXIT_FAILUE);
 	if (!init(&mon, &conf))
 		return (EXIT_FAILUE);
-	set_start_time(&mon.start_time, get_current_mstime());
+	set_start_time(&mon.start_time);
+	
+	int i = 0;
+	while (i < mon.conf->n_philo)
+	{
+		mon.philos[i].last_eat_time.value = mon.start_time;
+		i++;
+	}
+
 	return (execute_thread(&mon));
 }

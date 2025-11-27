@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:42:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/25 10:13:04 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/27 10:23:56 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_atomic_bool
 typedef struct s_atomic_long
 {
 	pthread_mutex_t	lock;
-	long			value;
+	long long		value;
 }					t_atomic_long;
 
 typedef struct s_atomic_int
@@ -62,7 +62,7 @@ typedef struct s_table
 	pthread_mutex_t	*fork_lock;
 	pthread_mutex_t	print_lock;
 	t_atomic_bool	is_died;
-	long			start_time;
+	long long		start_time;
 	t_philo_config	*conf;
 }					t_table;
 
@@ -82,7 +82,7 @@ typedef struct s_monitor
 	pthread_mutex_t	*fork_lock;
 	pthread_mutex_t	print_lock;
 	t_atomic_bool	is_died;
-	long			start_time;
+	long long		start_time;
 	t_philo_config	*conf;
 	t_philo			*philos;
 	pthread_t		thread;
@@ -90,7 +90,7 @@ typedef struct s_monitor
 
 size_t				ft_strlen(const char *s);
 t_bool				ft_is_digit(int ch);
-long				ft_atol(const char *nptr);
+long long			ft_atol(const char *nptr);
 
 // xmalloc.c
 void				*xmalloc(size_t size);
