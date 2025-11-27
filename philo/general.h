@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:42:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/27 12:53:31 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/27 13:01:16 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_philo_config
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				time_to_think;
 	int				must_eat;
 }					t_philo_config;
 
