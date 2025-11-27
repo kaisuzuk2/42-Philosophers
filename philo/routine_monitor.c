@@ -6,23 +6,11 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:35:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/27 13:19:04 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/27 13:21:28 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-/*
-philo_routine
-1) is_died flg check
-2) get fork
-3) eat
-4) sleep
-5) thinking
-
-monitor_routine
-
-*/
 
 static t_bool	check_timeout_died(t_monitor *mon)
 {
@@ -43,9 +31,10 @@ static t_bool	check_timeout_died(t_monitor *mon)
 	return (FALSE);
 }
 
-static t_bool check_must_eat(t_philo *philos, const int n_philo, const int must_eat)
+static t_bool	check_must_eat(t_philo *philos, const int n_philo,
+		const int must_eat)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < n_philo)
@@ -66,7 +55,8 @@ void	*monitor_routine(void *arg)
 	{
 		if (check_timeout_died(mon))
 			return (NULL);
-		if (check_must_eat(mon->philos, mon->conf->n_philo, mon->conf->must_eat))
+		if (check_must_eat(mon->philos, mon->conf->n_philo,
+				mon->conf->must_eat))
 			return (NULL);
 		usleep(DF_SLEEP);
 	}
