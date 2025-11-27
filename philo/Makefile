@@ -6,7 +6,7 @@
 #    By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/22 11:23:12 by kaisuzuk          #+#    #+#              #
-#    Updated: 2025/11/26 14:37:31 by kaisuzuk         ###   ########.fr        #
+#    Updated: 2025/11/27 10:15:54 by kaisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ SRCS	=	main.c \
 			valid.c \
 			parse.c \
 			init.c \
-			philo_routine.c \
-			monitor_routine.c \
+			routine_philo.c \
+			routine_monitor.c \
 			thread_routine_utils.c \
 			get.c \
 			set.c \
