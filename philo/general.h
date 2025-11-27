@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:42:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/27 10:23:56 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/27 11:09:57 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef int			t_bool;
 # define FALSE 0
 
 # define EXIT_SUCCESS 0
-# define EXIT_FAILUE 1
+# define EXIT_FAILURE 1
 
 # define CONF_SIZE 5
 

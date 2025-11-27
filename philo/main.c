@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:19:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/27 10:42:31 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/27 11:10:22 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,11 @@ int	main(int argc, char *argv[])
 	t_monitor		mon;
 
 	if (!valid(argc, argv))
-		return (EXIT_FAILUE);
+		return (EXIT_FAILURE);
 	if (!parse(argv, &conf))
-		return (EXIT_FAILUE);
+		return (EXIT_FAILURE);
 	if (!init(&mon, &conf))
-		return (EXIT_FAILUE);
+		return (EXIT_FAILURE);
 	set_start_time(&mon.start_time);
 	
 	int i = 0;
