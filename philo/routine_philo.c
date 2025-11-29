@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 13:36:13 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/28 09:16:24 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/29 13:58:06 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ static t_bool	do_eat(t_philo *philo, t_bool is_must_eat)
 {
 	if (is_died(&philo->table->is_died))
 		return (FALSE);
+	while (!is_can_eat(philo))
+	{
+		sleep_until(DF_SLEEP);
+		if (is_died(&philo->table->is_died))
+			return (FALSE);
+	}
 	take_forks(philo);
 	set_last_eat_time(&philo->last_eat_time, get_current_mstime());
 	if (is_died(&philo->table->is_died))
@@ -86,6 +92,7 @@ void	*philo_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	is_must_eat = philo->table->conf->must_eat != NOT_SET;
+	set_last_eat_time(&philo->last_eat_time, -1);
 	if (is_single_philo(philo))
 		return (NULL);
 	while (1)

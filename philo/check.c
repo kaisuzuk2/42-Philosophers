@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 11:37:04 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/29 10:19:15 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/29 13:53:14 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,15 @@ t_bool	is_died(t_atomic_bool *is_died)
 	return (res);
 }
 
-t_bool	is_timeout_died(const long long last_eat_time, const int time_to_died)
+t_bool	is_timeout_died(const long long last_eat_time, const int time_to_died,
+		const long long start_time)
 {
-	return (get_current_mstime() - last_eat_time > time_to_died);
+	long long	time;
+
+	time = last_eat_time;
+	if (time < 0)
+		time = start_time;
+	return (get_current_mstime() - time > time_to_died);
 }
 
 t_bool	is_done_eating(t_atomic_int *eat_count, const int must_eat)

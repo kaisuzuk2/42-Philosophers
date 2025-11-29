@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:46:48 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/29 11:12:58 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/29 11:37:44 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	init_philos(t_philo *philos, t_table *table, const int philo_num)
 		philos->table = table;
 		pthread_mutex_init(&philos->last_eat_time.lock, NULL);
 		pthread_mutex_init(&philos->eat_count.lock, NULL);
-		pthread_mutex_init(&philos->can_eat.is_flg, NULL);
+		pthread_mutex_init(&philos->can_eat.lock, NULL);
 		philos->can_eat.is_flg = TRUE;
 		philos++;
 		i++;
