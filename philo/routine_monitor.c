@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:35:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/27 15:30:18 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/29 10:12:12 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	*monitor_routine(void *arg)
 		if (check_must_eat(mon->philos, mon->conf->n_philo,
 				mon->conf->must_eat))
 			return (NULL);
-		usleep(DF_SLEEP);
+		usleep(MON_SLEEP);
 	}
 	return (NULL);
 }

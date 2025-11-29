@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:42:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/27 13:01:16 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/29 10:15:59 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
-# include <string.h>
 
 typedef int			t_bool;
 # define TRUE 1
@@ -73,6 +73,7 @@ typedef struct s_philo
 	int				r_fork;
 	t_atomic_long	last_eat_time;
 	t_atomic_int	eat_count;
+	t_atomic_bool	can_eat;
 	pthread_t		thread;
 	t_table			*table;
 }					t_philo;
