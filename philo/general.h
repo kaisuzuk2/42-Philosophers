@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:42:07 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/29 10:15:59 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/29 11:08:54 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_monitor
 	long long		start_time;
 	t_philo_config	*conf;
 	t_philo			*philos;
+	int				*eat_oder;
 	pthread_t		thread;
 }					t_monitor;
 

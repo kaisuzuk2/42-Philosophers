@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:35:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/29 10:12:12 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/29 11:36:58 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,97 @@ static t_bool	check_must_eat(t_philo *philos, const int n_philo,
 	return (TRUE);
 }
 
+static void reset_can_eat(t_monitor *mon)
+{
+	int i;
+
+	i = 0;
+	while (i < mon->conf->n_philo)
+	{
+		set_can_eat(&mon->philos[i].can_eat, FALSE);
+		i++;
+	}
+}
+
+static void init_eat_oder(int *eat_oder, const int n_philo)
+{
+	int i;
+
+	i = 0;
+	while (i < n_philo)
+	{
+		eat_oder[i] = i;
+		i++;
+	}
+}
+
+static void ft_swap(int *a, int *b)
+{
+	int tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+static void sort_oder(int *eat_oder, t_philo *philos, const int n_philo)
+{
+	int i;
+	int j;
+	
+	i = 0;
+	while (i < n_philo)
+	{
+		j = i;
+		while (j < n_philo - 1)
+		{
+			if (get_last_eat_time(&philos[eat_oder[j]].last_eat_time) > get_last_eat_time(&philos[eat_oder[j + 1]].last_eat_time))
+				ft_swap(&eat_oder[j], &eat_oder[j + 1]);
+			j++;
+		}
+		i++;
+	}
+}
+
+static void fair_eat(int *eat_oder, t_philo *philos, const int n_philo)
+{
+	const int max_eat = n_philo / 2;
+	int i;
+	int check_oder;
+
+	i = 0;
+	check_oder = 0;
+	while (i < n_philo)
+	{
+		if (eat_oder[i] == 0)
+		{
+			if (!is_can_eat(&philos[eat_oder[i] + 1].can_eat) && !is_can_eat(&philos[n_philo]))
+				set_can_eat(&philos[eat_oder[i]].can_eat, TRUE);
+		}
+		else if (eat_oder[i] == n_philo)
+		{
+			if (!is_can_eat(&philos[0].can_eat) && !is_can_eat(&philos[eat_oder[i] - 1].can_eat))
+				set_can_eat(&philos[eat_oder[i]].can_eat, TRUE);
+		}
+		else
+			if (!is_can_eat(&philos[eat_oder[i] + 1].can_eat) && !is_can_eat(&philos[eat_oder[i] - 1].can_eat))
+				set_can_eat(&philos[eat_oder[i]].can_eat, TRUE);
+		i++;
+		check_oder++;
+		if (check_oder > max_eat)
+			break;
+	}
+}
+
+static void update_fari_eat(t_monitor *mon)
+{
+	reset_can_eat(mon);
+	init_eat_oder(mon->eat_oder, mon->conf->n_philo);
+	sort_oder(mon->eat_oder, mon->philos, mon->conf->n_philo);
+	fair_eat(mon->eat_oder, mon->philos, mon->conf->n_philo);
+}
+
+
 void	*monitor_routine(void *arg)
 {
 	t_monitor *mon;
@@ -64,6 +155,7 @@ void	*monitor_routine(void *arg)
 		if (check_must_eat(mon->philos, mon->conf->n_philo,
 				mon->conf->must_eat))
 			return (NULL);
+		update_fari_eat(mon);
 		usleep(MON_SLEEP);
 	}
 	return (NULL);

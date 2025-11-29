@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:46:48 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/29 10:16:30 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/29 11:12:58 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	init_philos(t_philo *philos, t_table *table, const int philo_num)
 		pthread_mutex_init(&philos->last_eat_time.lock, NULL);
 		pthread_mutex_init(&philos->eat_count.lock, NULL);
 		pthread_mutex_init(&philos->can_eat.is_flg, NULL);
+		philos->can_eat.is_flg = TRUE;
 		philos++;
 		i++;
 	}
@@ -49,13 +50,16 @@ static void	init_monitor_mutex(t_monitor *mon)
 static t_bool	init_monitor(t_monitor *mon, t_philo *philos,
 		t_philo_config *conf)
 {
-	pthread_mutex_t	*fork_arr;
-
-	fork_arr = (pthread_mutex_t *)xmalloc(sizeof(pthread_mutex_t)
+	mon->fork_lock = (pthread_mutex_t *)xmalloc(sizeof(pthread_mutex_t)
 			* conf->n_philo);
-	if (!fork_arr)
+	if (!mon->fork_lock)
 		return (FALSE);
-	mon->fork_lock = fork_arr;
+	mon->eat_oder = (int *)xmalloc(sizeof(int) * conf->n_philo);
+	if (!mon->eat_oder)
+	{
+		free(mon->fork_lock);
+		return (FALSE);
+	}
 	mon->conf = conf;
 	mon->philos = philos;
 	mon->is_died.is_flg = FALSE;

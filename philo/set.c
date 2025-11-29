@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:39:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/29 10:20:54 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/29 10:24:31 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	set_start_time(long long *start_time)
 	*start_time = get_current_mstime();
 }
 
-void	set_can_eat(t_atomic_bool *can_eat)
+void	set_can_eat(t_atomic_bool *can_eat, t_bool flg)
 {
 	pthread_mutex_lock(&can_eat->lock);
-	can_eat->is_flg = TRUE;
+	can_eat->is_flg = flg;
 	pthread_mutex_unlock(&can_eat->lock);
 }
