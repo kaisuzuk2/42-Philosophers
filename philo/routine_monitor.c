@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:35:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/29 14:52:55 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/29 15:20:29 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,25 +80,66 @@ static void	ft_swap(int *a, int *b)
 	*b = tmp;
 }
 
+// static void	sort_oder(int *eat_oder, t_philo *philos, const int n_philo)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+// 	while (i < n_philo)
+// 	{
+// 		j = i;
+// 		while (j < n_philo - 1)
+// 		{
+// 			if (get_last_eat_time(&philos[eat_oder[j]].last_eat_time) > get_last_eat_time(&philos[eat_oder[j
+// 					+ 1]].last_eat_time))
+// 				ft_swap(&eat_oder[j], &eat_oder[j + 1]);
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// }
+
+static long	get_last_time_idx(int idx, t_philo *philos)
+{
+	return (get_last_eat_time(&philos[idx].last_eat_time));
+}
+
+static void	quick_sort_order(int *eat_oder, t_philo *philos, int left, int right)
+{
+	int		i;
+	int		j;
+	long	pivot;
+
+	i = left;
+	j = right;
+	pivot = get_last_time_idx(eat_oder[(left + right) / 2], philos);
+	while (i <= j)
+	{
+		while (get_last_time_idx(eat_oder[i], philos) < pivot)
+			i++;
+		while (get_last_time_idx(eat_oder[j], philos) > pivot)
+			j--;
+		if (i <= j)
+		{
+			ft_swap(&eat_oder[i], &eat_oder[j]);
+			i++;
+			j--;
+		}
+	}
+	if (left < j)
+		quick_sort_order(eat_oder, philos, left, j);
+	if (i < right)
+		quick_sort_order(eat_oder, philos, i, right);
+}
+
 static void	sort_oder(int *eat_oder, t_philo *philos, const int n_philo)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < n_philo)
-	{
-		j = i;
-		while (j < n_philo - 1)
-		{
-			if (get_last_eat_time(&philos[eat_oder[j]].last_eat_time) > get_last_eat_time(&philos[eat_oder[j
-					+ 1]].last_eat_time))
-				ft_swap(&eat_oder[j], &eat_oder[j + 1]);
-			j++;
-		}
-		i++;
-	}
+	if (n_philo <= 1)
+		return ;
+	quick_sort_order(eat_oder, philos, 0, n_philo - 1);
 }
+
 
 static void	fair_eat(int *eat_oder, t_philo *philos, const int n_philo)
 {
@@ -168,8 +209,8 @@ void	*monitor_routine(void *arg)
 		if (check_must_eat(mon->philos, mon->conf->n_philo,
 				mon->conf->must_eat))
 			return (NULL);
-		usleep(DF_SLEEP);
 		update_fari_eat(mon);
+		usleep(MON_SLEEP);
 	}
 	return (NULL);
 }
