@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:35:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/29 15:20:29 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/30 09:20:55 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ static long	get_last_time_idx(int idx, t_philo *philos)
 	return (get_last_eat_time(&philos[idx].last_eat_time));
 }
 
-static void	quick_sort_order(int *eat_oder, t_philo *philos, int left, int right)
+static void	quick_sort_order(int *eat_oder, t_philo *philos, int left,
+		int right)
 {
 	int		i;
 	int		j;
@@ -140,47 +141,26 @@ static void	sort_oder(int *eat_oder, t_philo *philos, const int n_philo)
 	quick_sort_order(eat_oder, philos, 0, n_philo - 1);
 }
 
-
 static void	fair_eat(int *eat_oder, t_philo *philos, const int n_philo)
 {
 	const int	max_eat = n_philo / 2;
+	int			left;
+	int			right;
 	int			i;
-	int			check_oder;
+	int			count;
 
 	i = 0;
-	check_oder = 0;
-	while (i < n_philo)
+	count = 0;
+	while (i < n_philo && count <= max_eat)
 	{
-		if (eat_oder[i] == 0)
+		left = (eat_oder[i] -1 + n_philo) % n_philo;
+		right = (eat_oder[i] + 1) % n_philo;
+		if (!is_can_eat(&philos[left]) && !is_can_eat(&philos[right]))
 		{
-			if (!is_can_eat(&philos[eat_oder[i] + 1])
-				&& !is_can_eat(&philos[n_philo - 1]))
-			{
-				set_can_eat(&philos[eat_oder[i]].can_eat, TRUE);
-				check_oder++;
-			}
-		}
-		else if (eat_oder[i] == n_philo - 1)
-		{
-			if (!is_can_eat(&philos[0]) && !is_can_eat(&philos[eat_oder[i]
-					- 1]))
-			{
-				set_can_eat(&philos[eat_oder[i]].can_eat, TRUE);
-				check_oder++;
-			}
-		}
-		else
-		{
-			if (!is_can_eat(&philos[eat_oder[i] + 1])
-				&& !is_can_eat(&philos[eat_oder[i] - 1]))
-			{
-				set_can_eat(&philos[eat_oder[i]].can_eat, TRUE);
-				check_oder++;
-			}
+			set_can_eat(&philos[eat_oder[i]].can_eat, TRUE);
+			count++;
 		}
 		i++;
-		if (check_oder > max_eat)
-			break ;
 	}
 }
 
