@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:35:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/30 09:20:55 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/30 15:44:08 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,26 +80,6 @@ static void	ft_swap(int *a, int *b)
 	*b = tmp;
 }
 
-// static void	sort_oder(int *eat_oder, t_philo *philos, const int n_philo)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	while (i < n_philo)
-// 	{
-// 		j = i;
-// 		while (j < n_philo - 1)
-// 		{
-// 			if (get_last_eat_time(&philos[eat_oder[j]].last_eat_time) > get_last_eat_time(&philos[eat_oder[j
-// 					+ 1]].last_eat_time))
-// 				ft_swap(&eat_oder[j], &eat_oder[j + 1]);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
-
 static long	get_last_time_idx(int idx, t_philo *philos)
 {
 	return (get_last_eat_time(&philos[idx].last_eat_time));
@@ -151,9 +131,9 @@ static void	fair_eat(int *eat_oder, t_philo *philos, const int n_philo)
 
 	i = 0;
 	count = 0;
-	while (i < n_philo && count <= max_eat)
+	while (i < n_philo && count < max_eat)
 	{
-		left = (eat_oder[i] -1 + n_philo) % n_philo;
+		left = (eat_oder[i] - 1 + n_philo) % n_philo;
 		right = (eat_oder[i] + 1) % n_philo;
 		if (!is_can_eat(&philos[left]) && !is_can_eat(&philos[right]))
 		{
@@ -164,7 +144,7 @@ static void	fair_eat(int *eat_oder, t_philo *philos, const int n_philo)
 	}
 }
 
-static void	update_fari_eat(t_monitor *mon)
+static void	update_fair_eat(t_monitor *mon)
 {
 	reset_can_eat(mon);
 	init_eat_oder(mon->eat_oder, mon->conf->n_philo);
@@ -177,8 +157,10 @@ void	*monitor_routine(void *arg)
 	t_monitor *mon;
 
 	mon = (t_monitor *)arg;
+	update_fair_eat(mon);
 	while (1)
 	{
+		update_fair_eat(mon);
 		if (mon->conf->n_philo == 1)
 		{
 			print_state(&mon->philos[0], ST_DIED);
@@ -189,8 +171,7 @@ void	*monitor_routine(void *arg)
 		if (check_must_eat(mon->philos, mon->conf->n_philo,
 				mon->conf->must_eat))
 			return (NULL);
-		update_fari_eat(mon);
-		usleep(MON_SLEEP);
+		usleep(DF_SLEEP);
 	}
 	return (NULL);
 }

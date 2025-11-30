@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:41:32 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/29 13:51:54 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/11/30 15:42:34 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ t_bool		is_timeout_died(const long long last_eat_time,
 				const int time_to_died, const long long start_time);
 t_bool		is_single_philo(t_philo *philo);
 t_bool		is_can_eat(t_philo *philo);
+t_bool		is_all_take_fork(t_atomic_int *is_eat_finished);
 
 #endif
