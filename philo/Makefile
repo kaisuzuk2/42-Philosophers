@@ -18,7 +18,9 @@ DEBUG	=	-fsanitize=thread
 
 RM		=	rm -rf
 
-SRCS	=	main.c \
+INC		=	-Iincludes
+SRC_DIR	=	srcs
+_SRCS	=	main.c \
 			general.c \
 			valid.c \
 			parse.c \
@@ -33,16 +35,17 @@ SRCS	=	main.c \
 			error.c \
 			dispose.c \
 			xmalloc.c 
+SRCS	=	$(addprefix $(SRC_DIR)/, $(_SRCS))
 
 OBJS	=	$(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -o $(NAME) $(FLAG)  $(OBJS)
+	$(CC) -o $(NAME) $(INC) $(FLAG)  $(OBJS)
 
 %.o: %.c
-	$(CC) -c  $(FLAG) $< -o $@
+	$(CC) -c  $(INC) $(FLAG) $< -o $@
 
 clean:
 	$(RM) $(OBJS)
