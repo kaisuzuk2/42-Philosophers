@@ -17,39 +17,44 @@
 */
 #include "philo.h"
 
-void	create_thread(t_monitor *mon, t_bool is_monitor)
+int	create_thread(t_monitor *mon, t_bool is_monitor)
 {
 	int	i;
+	int s;
 
 	if (is_monitor)
-	{
-		pthread_create(&mon->thread, NULL, monitor_routine, mon);
-		return ;
-	}
+		return (pthread_create(&mon->thread, NULL, monitor_routine, mon));
 	i = 0;
 	while (i < mon->conf->n_philo)
 	{
-		pthread_create(&mon->philos[i].thread, NULL, philo_routine,
+		s = pthread_create(&mon->philos[i].thread, NULL, philo_routine,
 			&mon->philos[i]);
+		if (s)
+		{
+			while (--i >= 0)
+				pthread_join(mon->philos[i].thread, NULL);
+			break;
+		}
 		i++;
 	}
+	return (s);
 }
 
-void	join_thread(t_monitor *mon, t_bool is_monitor)
+int	join_thread(t_monitor *mon, t_bool is_monitor)
 {
 	int	i;
+	int s;
 
+	s = 0;
 	if (is_monitor)
-	{
-		pthread_join(mon->thread, NULL);
-		return ;
-	}
+		return (pthread_join(mon->thread, NULL));
 	i = 0;
 	while (i < mon->conf->n_philo)
 	{
-		pthread_join(mon->philos[i].thread, NULL);
+		s = pthread_join(mon->philos[i].thread, NULL);
 		i++;
 	}
+	return (s);
 }
 
 void	destroy_mutex(t_monitor *mon)
@@ -75,10 +80,18 @@ void	destroy_mutex(t_monitor *mon)
 
 int	execute_thread(t_monitor *mon)
 {
-	create_thread(mon, PHILO);
-	create_thread(mon, MONITOR);
-	join_thread(mon, PHILO);
-	join_thread(mon, MONITOR);
+	int s;
+
+	if (create_thread(mon, PHILO) || create_thread(mon, MONITOR))
+	{
+		print_error("SYSERROR", "pthread_create failed.");
+		return (EXIT_FAILURE);
+	}
+	if (join_thread(mon, PHILO) || join_thread(mon, MONITOR))
+	{
+		print_error("SYSERROR", "pthread_join failed.");
+		return (EXIT_FAILURE);
+	}
 	destroy_mutex(mon);
 	free(mon->philos);
 	free(mon->fork_lock);
