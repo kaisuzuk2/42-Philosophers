@@ -20,8 +20,7 @@ RM		=	rm -rf
 
 INC		=	-Iincludes
 SRC_DIR	=	srcs
-_SRCS	=	main.c \
-			general.c \
+_SRCS	=	general.c \
 			valid.c \
 			parse.c \
 			parse_utils.c \
@@ -42,7 +41,7 @@ OBJS	=	$(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -o $(NAME) $(INC) $(FLAG)  $(OBJS)
+	$(CC) -o $(NAME) main.c $(INC) $(FLAG)  $(OBJS)
 
 %.o: %.c
 	$(CC) -c  $(INC) $(FLAG) $< -o $@
