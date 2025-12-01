@@ -60,7 +60,6 @@ t_bool	parse(char **argv, t_philo_config *p_conf)
 {
 	size_t i;
 	long long int arr[CONF_SIZE];
-	// int *p;
 
 	memset(arr, 0, sizeof(arr));
 	i = 0;
@@ -73,13 +72,6 @@ t_bool	parse(char **argv, t_philo_config *p_conf)
 	if (!parse_check(arr, i))
 		return (print_error("Error", "arguments must be positive integers"),
 			FALSE);
-	// p = (int *)p_conf;
-	// i = 0;
-	// while (i < CONF_SIZE)
-	// {
-	// 	p[i] = (int)arr[i];
-	// 	i++;
-	// }
 	set_config(arr, p_conf);
 	return (TRUE);
 }
