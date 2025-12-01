@@ -29,6 +29,8 @@ _SRCS	=	general.c \
 			routine_philo.c \
 			routine_philo_utils.c \
 			routine_monitor.c \
+			routine_monitor_scheduler.c \
+			quick_sort.c \
 			routine_utils.c \
 			get.c \
 			set.c \

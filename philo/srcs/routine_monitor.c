@@ -12,6 +12,9 @@
 
 #include "philo.h"
 
+// routine_monitor_scheduler.c
+void	update_fair_eat(t_monitor *mon);
+
 static t_bool	check_timeout_died(t_monitor *mon)
 {
 	int	i;
@@ -45,111 +48,6 @@ static t_bool	check_must_eat(t_philo *philos, const int n_philo,
 		i++;
 	}
 	return (TRUE);
-}
-
-static void	reset_can_eat(t_monitor *mon)
-{
-	int	i;
-
-	i = 0;
-	while (i < mon->conf->n_philo)
-	{
-		set_can_eat(&mon->philos[i].can_eat, FALSE);
-		i++;
-	}
-}
-
-static void	init_eat_oder(int *eat_oder, const int n_philo)
-{
-	int	i;
-
-	i = 0;
-	while (i < n_philo)
-	{
-		eat_oder[i] = i;
-		i++;
-	}
-}
-
-static void	ft_swap(int *a, int *b)
-{
-	int	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-static long	get_last_time_idx(int idx, t_philo *philos)
-{
-	return (get_last_eat_time(&philos[idx].last_eat_time));
-}
-
-static void	quick_sort_order(int *eat_oder, t_philo *philos, int left,
-		int right)
-{
-	int		i;
-	int		j;
-	long	pivot;
-
-	i = left;
-	j = right;
-	pivot = get_last_time_idx(eat_oder[(left + right) / 2], philos);
-	while (i <= j)
-	{
-		while (get_last_time_idx(eat_oder[i], philos) < pivot)
-			i++;
-		while (get_last_time_idx(eat_oder[j], philos) > pivot)
-			j--;
-		if (i <= j)
-		{
-			ft_swap(&eat_oder[i], &eat_oder[j]);
-			i++;
-			j--;
-		}
-	}
-	if (left < j)
-		quick_sort_order(eat_oder, philos, left, j);
-	if (i < right)
-		quick_sort_order(eat_oder, philos, i, right);
-}
-
-static void	sort_oder(int *eat_oder, t_philo *philos, const int n_philo)
-{
-	if (n_philo <= 1)
-		return ;
-	quick_sort_order(eat_oder, philos, 0, n_philo - 1);
-}
-
-static void	fair_eat(int *eat_oder, t_philo *philos, const int n_philo)
-{
-	const int	max_eat = n_philo / 2;
-	int			left;
-	int			right;
-	int			i;
-	int			count;
-
-	i = 0;
-	count = 0;
-	while (i < n_philo && count < max_eat)
-	{
-		left = (eat_oder[i] - 1 + n_philo) % n_philo;
-		right = (eat_oder[i] + 1) % n_philo;
-		if (!is_can_eat(&philos[left]) && !is_can_eat(&philos[right]))
-		{
-			set_can_eat(&philos[eat_oder[i]].can_eat, TRUE);
-			count++;
-		}
-		i++;
-	}
-}
-
-static void	update_fair_eat(t_monitor *mon)
-{
-	reset_can_eat(mon);
-	init_eat_oder(mon->eat_oder, mon->conf->n_philo);
-	sort_oder(mon->eat_oder, mon->philos, mon->conf->n_philo);
-	fair_eat(mon->eat_oder, mon->philos, mon->conf->n_philo);
 }
 
 void	*monitor_routine(void *arg)
