@@ -12,6 +12,24 @@
 
 #include "philo.h"
 
+static void init_atomic_bool(t_atomic_bool *b, const t_bool val)
+{
+	b->is_flg = val;
+	pthread_mutex_init(&b->lock, NULL);
+}
+
+static void init_atomic_int(t_atomic_int *i, const int val)
+{
+	i->value = val;
+	pthread_mutex_init(&i->lock, NULL);
+}
+
+static void init_atomic_long(t_atomic_long *l, const long long int val)
+{
+	l->value = val;
+	pthread_mutex_init(&l->lock, NULL);
+}
+
 static void	init_philos(t_philo *philos, t_table *table, const int philo_num)
 {
 	int	i;
@@ -22,12 +40,10 @@ static void	init_philos(t_philo *philos, t_table *table, const int philo_num)
 		philos->id = i;
 		philos->l_fork = i;
 		philos->r_fork = (i + 1) % philo_num;
-		philos->eat_count.value = 0;
 		philos->table = table;
-		pthread_mutex_init(&philos->last_eat_time.lock, NULL);
-		pthread_mutex_init(&philos->eat_count.lock, NULL);
-		pthread_mutex_init(&philos->can_eat.lock, NULL);
-		philos->can_eat.is_flg = TRUE;
+		init_atomic_long(&philos->last_eat_time, -1);
+		init_atomic_int(&philos->eat_count, 0);
+		init_atomic_bool(&philos->can_eat, TRUE);
 		philos++;
 		i++;
 	}

@@ -93,7 +93,6 @@ void	*philo_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	is_must_eat = philo->table->conf->must_eat != NOT_SET;
-	set_last_eat_time(&philo->last_eat_time, -1);
 	if (is_single_philo(philo))
 		return (NULL);
 	while (1)
