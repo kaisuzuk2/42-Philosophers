@@ -29,7 +29,7 @@ _SRCS	=	general.c \
 			routine_philo.c \
 			routine_philo_utils.c \
 			routine_monitor.c \
-			thread_routine_utils.c \
+			routine_utils.c \
 			get.c \
 			set.c \
 			check.c \
