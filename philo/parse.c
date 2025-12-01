@@ -12,20 +12,10 @@
 
 #include "philo.h"
 
-static t_bool	is_zero(const long long n)
-{
-	return (n == 0);
-}
-
-static t_bool	is_overflow(const long long n)
-{
-	return (n > INT_MAX || n < INT_MIN);
-}
-
-static t_bool	is_negative(const long long n)
-{
-	return (n < 0);
-}
+// parse_utils.c
+t_bool	is_zero(const long long n);
+t_bool	is_overflow(const long long n);
+t_bool	is_negative(const long long n);
 
 static t_bool parse_check(const long long *arr, size_t size)
 {

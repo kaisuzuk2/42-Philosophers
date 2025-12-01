@@ -22,6 +22,7 @@ SRCS	=	main.c \
 			general.c \
 			valid.c \
 			parse.c \
+			parse_utils.c \
 			init.c \
 			routine_philo.c \
 			routine_monitor.c \
