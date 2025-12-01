@@ -12,23 +12,10 @@
 
 #include "philo.h"
 
-static void init_atomic_bool(t_atomic_bool *b, const t_bool val)
-{
-	b->is_flg = val;
-	pthread_mutex_init(&b->lock, NULL);
-}
-
-static void init_atomic_int(t_atomic_int *i, const int val)
-{
-	i->value = val;
-	pthread_mutex_init(&i->lock, NULL);
-}
-
-static void init_atomic_long(t_atomic_long *l, const long long int val)
-{
-	l->value = val;
-	pthread_mutex_init(&l->lock, NULL);
-}
+// init_utils.c
+void init_atomic_bool(t_atomic_bool *b, const t_bool val);
+void init_atomic_int(t_atomic_int *i, const int val);
+void init_atomic_long(t_atomic_long *l, const long long int val);
 
 static void	init_philos(t_philo *philos, t_table *table, const int philo_num)
 {

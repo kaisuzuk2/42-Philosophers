@@ -25,6 +25,7 @@ _SRCS	=	general.c \
 			parse.c \
 			parse_utils.c \
 			init.c \
+			init_utils.c \
 			routine_philo.c \
 			routine_monitor.c \
 			thread_routine_utils.c \
