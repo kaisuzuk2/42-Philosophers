@@ -57,16 +57,3 @@ t_bool	is_can_eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->can_eat.lock);
 	return (res);
 }
-
-t_bool	is_all_take_fork(t_atomic_int *is_eat_finished)
-{
-	t_bool res;
-	
-	pthread_mutex_lock(&is_eat_finished->lock);
-	if (is_eat_finished->value == 0)
-		res = TRUE;
-	else
-		res = FALSE;
-	pthread_mutex_unlock(&is_eat_finished->lock);
-	return (res);
-}

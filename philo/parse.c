@@ -27,29 +27,40 @@ static t_bool	is_negative(const long long n)
 	return (n < 0);
 }
 
-static t_bool	parse_check(const long long *arr, size_t size)
+static t_bool parse_check(const long long *arr, size_t size)
 {
-	size_t	i;
+	size_t i;
 
 	i = 0;
 	while (i < size)
 	{
-		if (is_zero(arr[i]))
-			return (FALSE);
-		if (is_negative(arr[i]))
-			return (FALSE);
-		if (is_overflow(arr[i]))
+		if (is_zero(arr[i]) || is_negative(arr[i]) || is_overflow(arr[i]))
 			return (FALSE);
 		i++;
 	}
+
 	return (TRUE);
+}
+
+static void set_config(long long int *arr, t_philo_config *p_conf)
+{
+	int *p;
+	size_t i;
+
+	i = 0;
+	p = (int *)p_conf;
+	while (i < CONF_SIZE)
+	{
+		p[i] = (int)arr[i];
+		i++;
+	}
 }
 
 t_bool	parse(char **argv, t_philo_config *p_conf)
 {
 	size_t i;
 	long long int arr[CONF_SIZE];
-	int *p;
+	// int *p;
 
 	memset(arr, 0, sizeof(arr));
 	i = 0;
@@ -62,12 +73,13 @@ t_bool	parse(char **argv, t_philo_config *p_conf)
 	if (!parse_check(arr, i))
 		return (print_error("Error", "arguments must be positive integers"),
 			FALSE);
-	p = (int *)p_conf;
-	i = 0;
-	while (i < CONF_SIZE)
-	{
-		p[i] = (int)arr[i];
-		i++;
-	}
+	// p = (int *)p_conf;
+	// i = 0;
+	// while (i < CONF_SIZE)
+	// {
+	// 	p[i] = (int)arr[i];
+	// 	i++;
+	// }
+	set_config(arr, p_conf);
 	return (TRUE);
 }

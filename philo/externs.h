@@ -70,6 +70,5 @@ t_bool		is_timeout_died(const long long last_eat_time,
 				const int time_to_died, const long long start_time);
 t_bool		is_single_philo(t_philo *philo);
 t_bool		is_can_eat(t_philo *philo);
-t_bool		is_all_take_fork(t_atomic_int *is_eat_finished);
 
 #endif
