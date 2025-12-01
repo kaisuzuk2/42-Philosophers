@@ -89,7 +89,6 @@ int	main(int argc, char *argv[])
 {
 	t_philo_config	conf;
 	t_monitor		mon;
-	int				i;
 
 	if (!valid(argc, argv))
 		return (EXIT_FAILURE);
@@ -98,11 +97,5 @@ int	main(int argc, char *argv[])
 	if (!init(&mon, &conf))
 		return (EXIT_FAILURE);
 	set_start_time(&mon.start_time);
-	i = 0;
-	while (i < mon.conf->n_philo)
-	{
-		mon.philos[i].last_eat_time.value = mon.start_time;
-		i++;
-	}
 	return (execute_thread(&mon));
 }

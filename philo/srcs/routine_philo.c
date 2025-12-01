@@ -59,17 +59,15 @@ static t_bool	take_forks(t_philo *philo)
 
 static t_bool	do_eat(t_philo *philo, t_bool is_must_eat)
 {
-	if (is_died(&philo->table->is_died))
-		return (FALSE);
-	if (!take_forks(philo))
+	if (is_died(&philo->table->is_died) || !take_forks(philo))
 		return (FALSE);
 	set_last_eat_time(&philo->last_eat_time, get_current_mstime());
+	print_state(philo, ST_EAT);
 	if (is_died(&philo->table->is_died))
 	{
 		release_forks(philo);
 		return (FALSE);
 	}
-	print_state(philo, ST_EAT);
 	sleep_until(philo->table->conf->time_to_eat);
 	set_eat_count(&philo->eat_count);
 	release_forks(philo);
