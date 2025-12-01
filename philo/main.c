@@ -45,10 +45,10 @@ int	join_thread(t_monitor *mon, t_bool is_monitor)
 	int	i;
 	int s;
 
-	s = 0;
 	if (is_monitor)
 		return (pthread_join(mon->thread, NULL));
 	i = 0;
+	s = 0;
 	while (i < mon->conf->n_philo)
 	{
 		s = pthread_join(mon->philos[i].thread, NULL);
@@ -80,17 +80,15 @@ void	destroy_mutex(t_monitor *mon)
 
 int	execute_thread(t_monitor *mon)
 {
-	int s;
-
 	if (create_thread(mon, PHILO) || create_thread(mon, MONITOR))
 	{
 		print_error("SYSERROR", "pthread_create failed.");
-		return (EXIT_FAILURE);
+		return (EXIT_FATALERR);
 	}
 	if (join_thread(mon, PHILO) || join_thread(mon, MONITOR))
 	{
 		print_error("SYSERROR", "pthread_join failed.");
-		return (EXIT_FAILURE);
+		return (EXIT_FATALERR);
 	}
 	destroy_mutex(mon);
 	free(mon->philos);

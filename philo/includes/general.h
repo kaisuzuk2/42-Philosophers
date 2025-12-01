@@ -27,6 +27,7 @@ typedef int			t_bool;
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
+# define EXIT_FATALERR 2
 
 # define CONF_SIZE 5
 
