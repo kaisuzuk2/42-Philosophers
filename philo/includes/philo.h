@@ -13,7 +13,6 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-# include "dispose.h"
 # include "error.h"
 # include "externs.h"
 # include "general.h"
