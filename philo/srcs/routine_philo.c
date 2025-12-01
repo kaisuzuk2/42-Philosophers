@@ -84,6 +84,7 @@ static t_bool do_think(t_philo *philo)
 {
 	if (is_died(&philo->table->is_died))
 		return (FALSE);
+	print_state(philo, ST_THINK);
 	while (!is_can_eat(philo))
 	{
 		usleep(DF_SLEEP);
