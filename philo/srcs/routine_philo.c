@@ -51,12 +51,6 @@ static t_bool	do_eat(t_philo *philo, t_bool is_must_eat)
 {
 	if (is_died(&philo->table->is_died))
 		return (FALSE);
-	while (!is_can_eat(philo))
-	{
-		usleep(DF_SLEEP);
-		if (is_died(&philo->table->is_died))
-			return (FALSE);
-	}
 	if (!take_forks(philo))
 		return (FALSE);
 	set_last_eat_time(&philo->last_eat_time, get_current_mstime());
@@ -86,6 +80,19 @@ static t_bool	do_sleep(t_philo *philo, unsigned int rest_time)
 	return (TRUE);
 }
 
+static t_bool do_think(t_philo *philo)
+{
+	if (is_died(&philo->table->is_died))
+		return (FALSE);
+	while (!is_can_eat(philo))
+	{
+		usleep(DF_SLEEP);
+		if (is_died(&philo->table->is_died))
+			return (FALSE);
+	}
+	return (TRUE);
+}
+
 void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
@@ -101,9 +108,8 @@ void	*philo_routine(void *arg)
 			return (NULL);
 		if (!do_sleep(philo, philo->table->conf->time_to_sleep))
 			return (NULL);
-		if (is_died(&philo->table->is_died))
+		if (!do_think(philo))
 			return (NULL);
-		print_state(philo, ST_THINK);
 	}
 	return (NULL);
 }

@@ -33,7 +33,6 @@ _SRCS	=	general.c \
 			set.c \
 			check.c \
 			error.c \
-			dispose.c \
 			xmalloc.c 
 SRCS	=	$(addprefix $(SRC_DIR)/, $(_SRCS))
 
