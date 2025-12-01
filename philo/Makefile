@@ -27,6 +27,7 @@ _SRCS	=	general.c \
 			init.c \
 			init_utils.c \
 			routine_philo.c \
+			routine_philo_utils.c \
 			routine_monitor.c \
 			thread_routine_utils.c \
 			get.c \
