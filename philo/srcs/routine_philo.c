@@ -29,26 +29,31 @@ static void select_forks(t_philo *philo, pthread_mutex_t **first, pthread_mutex_
 	}
 }
 
+static t_bool lock_fork(t_philo *philo, pthread_mutex_t *fork)
+{
+	pthread_mutex_lock(fork);
+	if (is_died(&philo->table->is_died))
+	{
+		pthread_mutex_unlock(fork);
+		return (FALSE);
+	}
+	print_state(philo, ST_FORK);
+	return (TRUE);
+}
+
 static t_bool	take_forks(t_philo *philo)
 {
 	pthread_mutex_t	*first_fork;
 	pthread_mutex_t	*second_fork;
 
 	select_forks(philo, &first_fork, &second_fork);
-	pthread_mutex_lock(first_fork);
-	if (is_died(&philo->table->is_died))
+	if (!lock_fork(philo, first_fork))
+		return (FALSE);
+	if (!lock_fork(philo, second_fork))
 	{
 		pthread_mutex_unlock(first_fork);
 		return (FALSE);
 	}
-	print_state(philo, ST_FORK);
-	pthread_mutex_lock(second_fork);
-	if (is_died(&philo->table->is_died))
-	{
-		release_forks(philo);
-		return (FALSE);
-	}
-	print_state(philo, ST_FORK);
 	return (TRUE);
 }
 
