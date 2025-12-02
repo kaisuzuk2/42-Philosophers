@@ -6,14 +6,14 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:35:27 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/30 15:44:08 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:31:30 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 // routine_monitor_scheduler.c
-void	scheduler(t_monitor *mon);
+void			scheduler(t_monitor *mon);
 
 static t_bool	check_timeout_died(t_monitor *mon)
 {
@@ -52,7 +52,7 @@ static t_bool	check_must_eat(t_philo *philos, const int n_philo,
 
 void	*monitor_routine(void *arg)
 {
-	t_monitor *mon;
+	t_monitor	*mon;
 
 	mon = (t_monitor *)arg;
 	scheduler(mon);

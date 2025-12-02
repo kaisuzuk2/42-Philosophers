@@ -6,18 +6,18 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 13:36:13 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/30 15:42:20 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:32:01 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 // routine_philo_utils.c
-void	release_forks(t_philo *philo);
-void select_forks(t_philo *philo, pthread_mutex_t **first, pthread_mutex_t **second);
-t_bool lock_fork(t_philo *philo, pthread_mutex_t *fork);
-t_bool	take_forks(t_philo *philo);
-
+void			release_forks(t_philo *philo);
+void			select_forks(t_philo *philo, pthread_mutex_t **first,
+					pthread_mutex_t **second);
+t_bool			lock_fork(t_philo *philo, pthread_mutex_t *fork);
+t_bool			take_forks(t_philo *philo);
 
 static t_bool	do_eat(t_philo *philo, t_bool is_must_eat)
 {
@@ -45,7 +45,7 @@ static t_bool	do_sleep(t_philo *philo, unsigned int rest_time)
 	return (TRUE);
 }
 
-static t_bool do_think(t_philo *philo)
+static t_bool	do_think(t_philo *philo)
 {
 	if (is_died(&philo->table->is_died))
 		return (FALSE);

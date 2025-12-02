@@ -6,20 +6,20 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:09:52 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/27 14:11:24 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:30:30 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 // parse_utils.c
-t_bool	is_zero(const long long n);
-t_bool	is_overflow(const long long n);
-t_bool	is_negative(const long long n);
+t_bool			is_zero(const long long n);
+t_bool			is_overflow(const long long n);
+t_bool			is_negative(const long long n);
 
-static t_bool parse_check(const long long *arr, size_t size)
+static t_bool	parse_check(const long long *arr, size_t size)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (i < size)
@@ -28,14 +28,13 @@ static t_bool parse_check(const long long *arr, size_t size)
 			return (FALSE);
 		i++;
 	}
-
 	return (TRUE);
 }
 
-static void set_config(long long int *arr, t_philo_config *p_conf)
+static void	set_config(long long int *arr, t_philo_config *p_conf)
 {
-	int *p;
-	size_t i;
+	int		*p;
+	size_t	i;
 
 	i = 0;
 	p = (int *)p_conf;
@@ -48,8 +47,8 @@ static void set_config(long long int *arr, t_philo_config *p_conf)
 
 t_bool	parse(char **argv, t_philo_config *p_conf)
 {
-	size_t i;
-	long long int arr[CONF_SIZE];
+	size_t			i;
+	long long int	arr[CONF_SIZE];
 
 	memset(arr, 0, sizeof(arr));
 	i = 0;

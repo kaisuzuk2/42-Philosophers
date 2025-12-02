@@ -6,16 +6,16 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:46:48 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/30 15:42:58 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:29:46 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 // init_utils.c
-void init_atomic_bool(t_atomic_bool *b, const t_bool val);
-void init_atomic_int(t_atomic_int *i, const int val);
-void init_atomic_long(t_atomic_long *l, const long long int val);
+void			init_atomic_bool(t_atomic_bool *b, const t_bool val);
+void			init_atomic_int(t_atomic_int *i, const int val);
+void			init_atomic_long(t_atomic_long *l, const long long int val);
 
 static void	init_philos(t_philo *philos, t_table *table, const int philo_num)
 {
@@ -72,7 +72,7 @@ static t_bool	init_monitor(t_monitor *mon, t_philo *philos,
 
 t_bool	init(t_monitor *mon, t_philo_config *conf)
 {
-	t_philo *philos;
+	t_philo	*philos;
 
 	philos = (t_philo *)xmalloc(sizeof(t_philo) * conf->n_philo);
 	if (!philos)

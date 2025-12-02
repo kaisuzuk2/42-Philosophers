@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 14:30:17 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/30 10:13:17 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:29:21 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ long long	get_time_stamp(const long long start_time)
 
 int	get_eat_count(t_atomic_int *eat_count)
 {
-	int res;
+	int	res;
 
 	pthread_mutex_lock(&eat_count->lock);
 	res = eat_count->value;

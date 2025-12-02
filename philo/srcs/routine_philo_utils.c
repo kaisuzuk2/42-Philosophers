@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine_philo_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  #+#  +:+       +#+        */
+/*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-12-01 08:52:15 by root              #+#    #+#             */
-/*   Updated: 2025-12-01 08:52:15 by root             ###   ########.fr       */
+/*   Created: 2025/12/01 08:52:15 by root              #+#    #+#             */
+/*   Updated: 2025/12/02 13:32:13 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	release_forks(t_philo *philo)
 	pthread_mutex_unlock(&philo->table->fork_lock[philo->r_fork]);
 }
 
-void select_forks(t_philo *philo, pthread_mutex_t **first, pthread_mutex_t **second)
+void	select_forks(t_philo *philo, pthread_mutex_t **first,
+		pthread_mutex_t **second)
 {
 	*first = &philo->table->fork_lock[philo->r_fork];
 	*second = &philo->table->fork_lock[philo->l_fork];
@@ -29,7 +30,7 @@ void select_forks(t_philo *philo, pthread_mutex_t **first, pthread_mutex_t **sec
 	}
 }
 
-t_bool lock_fork(t_philo *philo, pthread_mutex_t *fork)
+t_bool	lock_fork(t_philo *philo, pthread_mutex_t *fork)
 {
 	pthread_mutex_lock(fork);
 	if (is_died(&philo->table->is_died))

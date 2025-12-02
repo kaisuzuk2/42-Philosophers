@@ -6,15 +6,15 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:40:36 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/27 10:26:23 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:29:09 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-size_t ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (s[i])
@@ -22,15 +22,15 @@ size_t ft_strlen(const char *s)
 	return (i);
 }
 
-t_bool ft_is_digit(int ch)
+t_bool	ft_is_digit(int ch)
 {
 	return (ch >= '0' && ch <= '9');
 }
 
 long long	ft_atol(const char *nptr)
 {
-	int			sign;
-	long long	res;
+	int				sign;
+	long long int	res;
 
 	sign = 1;
 	while (*nptr == ' ' || (*nptr >= '\t' && *nptr <= '\r'))

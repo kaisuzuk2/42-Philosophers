@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   routine_monitor_scheduler.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  #+#  +:+       +#+        */
+/*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-12-01 09:10:24 by root              #+#    #+#             */
-/*   Updated: 2025-12-01 09:10:24 by root             ###   ########.fr       */
+/*   Created: 2025/12/01 09:10:24 by root              #+#    #+#             */
+/*   Updated: 2025/12/02 13:31:50 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 // quick_sort.c
-void quick_sort(int *arr, int size, t_philo *philos);
+void		quick_sort(int *arr, int size, t_philo *philos);
 
-static void init_round(int *eat_oder, t_philo *philos, const int size)
+static void	init_round(int *eat_oder, t_philo *philos, const int size)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < size)

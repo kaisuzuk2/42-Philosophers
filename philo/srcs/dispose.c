@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dispose.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  #+#  +:+       +#+        */
+/*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-12-02 01:33:58 by root              #+#    #+#             */
-/*   Updated: 2025-12-02 01:33:58 by root             ###   ########.fr       */
+/*   Created: 2025/12/02 01:33:58 by root              #+#    #+#             */
+/*   Updated: 2025/12/02 13:28:18 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static void	destroy_mutex(t_monitor *mon)
 	pthread_mutex_destroy(&mon->print_lock);
 }
 
-void dispose(t_monitor *mon)
+void	dispose(t_monitor *mon)
 {
-    destroy_mutex(mon);
-    free(mon->fork_lock);
-    free(mon->philos);
+	destroy_mutex(mon);
+	free(mon->fork_lock);
+	free(mon->philos);
 }
