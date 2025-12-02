@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:19:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/29 14:29:05 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:34:43 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 #include "philo.h"
 
 // dispose.c
-void dispose(t_monitor *mon);
+void	dispose(t_monitor *mon);
 
 int	create_thread(t_monitor *mon, t_bool is_monitor)
 {
 	int	i;
-	int s;
+	int	s;
 
 	if (is_monitor)
 		return (pthread_create(&mon->thread, NULL, monitor_routine, mon));
@@ -31,12 +31,12 @@ int	create_thread(t_monitor *mon, t_bool is_monitor)
 	while (i < mon->conf->n_philo)
 	{
 		s = pthread_create(&mon->philos[i].thread, NULL, philo_routine,
-			&mon->philos[i]);
+				&mon->philos[i]);
 		if (s)
 		{
 			while (--i >= 0)
 				pthread_join(mon->philos[i].thread, NULL);
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -46,7 +46,7 @@ int	create_thread(t_monitor *mon, t_bool is_monitor)
 int	join_thread(t_monitor *mon, t_bool is_monitor)
 {
 	int	i;
-	int s;
+	int	s;
 
 	if (is_monitor)
 		return (pthread_join(mon->thread, NULL));
