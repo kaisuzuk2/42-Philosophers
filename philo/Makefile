@@ -6,15 +6,13 @@
 #    By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/22 11:23:12 by kaisuzuk          #+#    #+#              #
-#    Updated: 2025/11/27 10:15:54 by kaisuzuk         ###   ########.fr        #
+#    Updated: 2025/12/02 13:53:05 by kaisuzuk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo
 CC		=	cc
-FLAG	=	-Wall -Werror -Wextra -g
-
-DEBUG	=	-fsanitize=thread
+FLAG	=	-Wall -Werror -Wextra
 
 RM		=	rm -rf
 
@@ -38,6 +36,7 @@ _SRCS	=	general.c \
 			error.c \
 			xmalloc.c \
 			dispose.c
+
 SRCS	=	$(addprefix $(SRC_DIR)/, $(_SRCS))
 
 OBJS	=	$(SRCS:.c=.o)
@@ -45,7 +44,7 @@ OBJS	=	$(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -o $(NAME) main.c $(INC) $(FLAG)  $(OBJS)
+	$(CC) -o $(NAME) main.c $(INC) $(FLAG) $(OBJS)
 
 %.o: %.c
 	$(CC) -c  $(INC) $(FLAG) $< -o $@
@@ -58,4 +57,4 @@ fclean: clean
 
 re:	fclean all
 
-.PHONY: clean fclean all
+.PHONY: clean fclean all re
