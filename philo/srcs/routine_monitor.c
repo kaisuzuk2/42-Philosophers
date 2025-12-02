@@ -64,7 +64,7 @@ void	*monitor_routine(void *arg)
 				mon->conf->must_eat))
 			return (NULL);
 		scheduler(mon);
-		usleep(DF_SLEEP);
+		usleep(MON_SLEEP);
 	}
 	return (NULL);
 }

@@ -23,7 +23,7 @@
 # define MAX_ARG 6
 
 # define DF_SLEEP 100
-# define MON_SLEEP 10000
+# define MON_SLEEP 1000
 
 # define MONITOR 1
 # define PHILO 0

@@ -18,6 +18,6 @@ void	*xmalloc(size_t size)
 
 	res = malloc(size);
 	if (!res)
-		return (print_error("SYSERROR", "malloc failed"), NULL);
+		print_error(SYSERR, "malloc failed.");
 	return (res);
 }

@@ -13,6 +13,9 @@
 #ifndef ERROR_H
 # define ERROR_H
 
+# define SYSERR "SYSERROR"
+# define CREATE_ERR "pthread_create failed."
+
 void	print_error(const char *label, const char *msg);
 void	print_usage(void);
 

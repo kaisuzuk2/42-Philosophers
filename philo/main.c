@@ -17,6 +17,9 @@
 */
 #include "philo.h"
 
+// dispose.c
+void dispose(t_monitor *mon);
+
 int	create_thread(t_monitor *mon, t_bool is_monitor)
 {
 	int	i;
@@ -57,42 +60,27 @@ int	join_thread(t_monitor *mon, t_bool is_monitor)
 	return (s);
 }
 
-void	destroy_mutex(t_monitor *mon)
-{
-	int	i;
-
-	i = 0;
-	while (i < mon->conf->n_philo)
-	{
-		pthread_mutex_destroy(&mon->fork_lock[i]);
-		i++;
-	}
-	pthread_mutex_destroy(&mon->is_died.lock);
-	pthread_mutex_destroy(&mon->print_lock);
-	i = 0;
-	while (i < mon->conf->n_philo)
-	{
-		pthread_mutex_destroy(&mon->philos[i].eat_count.lock);
-		pthread_mutex_destroy(&mon->philos[i].last_eat_time.lock);
-		i++;
-	}
-}
-
 int	execute_thread(t_monitor *mon)
 {
-	if (create_thread(mon, PHILO) || create_thread(mon, MONITOR))
+	if (create_thread(mon, PHILO))
 	{
-		print_error("SYSERROR", "pthread_create failed.");
+		print_error(SYSERR, CREATE_ERR);
+		dispose(mon);
+		return (EXIT_FATALERR);
+	}
+	if (create_thread(mon, MONITOR))
+	{
+		print_error(SYSERR, CREATE_ERR);
+		join_thread(mon, PHILO);
+		dispose(mon);
 		return (EXIT_FATALERR);
 	}
 	if (join_thread(mon, PHILO) || join_thread(mon, MONITOR))
 	{
-		print_error("SYSERROR", "pthread_join failed.");
+		print_error(SYSERR, "pthread_join failed.");
 		return (EXIT_FATALERR);
 	}
-	destroy_mutex(mon);
-	free(mon->philos);
-	free(mon->fork_lock);
+	dispose(mon);
 	return (EXIT_SUCCESS);
 }
 
