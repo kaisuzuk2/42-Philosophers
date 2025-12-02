@@ -36,7 +36,8 @@ _SRCS	=	general.c \
 			set.c \
 			check.c \
 			error.c \
-			xmalloc.c 
+			xmalloc.c \
+			dispose.c
 SRCS	=	$(addprefix $(SRC_DIR)/, $(_SRCS))
 
 OBJS	=	$(SRCS:.c=.o)

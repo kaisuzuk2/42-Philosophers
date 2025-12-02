@@ -20,17 +20,12 @@ static void	destroy_mutex(t_monitor *mon)
 	while (i < mon->conf->n_philo)
 	{
 		pthread_mutex_destroy(&mon->fork_lock[i]);
-		i++;
-	}
-	pthread_mutex_destroy(&mon->is_died.lock);
-	pthread_mutex_destroy(&mon->print_lock);
-	i = 0;
-	while (i < mon->conf->n_philo)
-	{
 		pthread_mutex_destroy(&mon->philos[i].eat_count.lock);
 		pthread_mutex_destroy(&mon->philos[i].last_eat_time.lock);
 		i++;
 	}
+	pthread_mutex_destroy(&mon->is_died.lock);
+	pthread_mutex_destroy(&mon->print_lock);
 }
 
 void dispose(t_monitor *mon)
