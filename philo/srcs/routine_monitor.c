@@ -26,8 +26,8 @@ static t_bool	check_timeout_died(t_monitor *mon)
 			&& is_timeout_died(get_last_eat_time(&mon->philos[i].last_eat_time),
 				mon->conf->time_to_die, mon->start_time))
 		{
-			set_died_flg(&mon->is_died);
 			print_state(&mon->philos[i], ST_DIED);
+			set_died_flg(&mon->is_died);
 			return (TRUE);
 		}
 		i++;

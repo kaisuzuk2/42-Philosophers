@@ -15,6 +15,11 @@
 void	print_state(t_philo *philo, const char *state)
 {
 	pthread_mutex_lock(&philo->table->print_lock);
+	if (is_died(&philo->table->is_died))
+	{
+		pthread_mutex_unlock(&philo->table->print_lock);
+		return ;
+	}
 	printf("%lld %d %s\n", get_time_stamp(philo->table->start_time), philo->id,
 		state);
 	pthread_mutex_unlock(&philo->table->print_lock);
