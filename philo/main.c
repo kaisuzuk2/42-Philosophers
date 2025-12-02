@@ -6,15 +6,11 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:19:20 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/12/02 13:46:13 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:41:29 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-1) valid
-2) thread create
-3) thread join
-*/
+
 #include "philo.h"
 
 // dispose.c
