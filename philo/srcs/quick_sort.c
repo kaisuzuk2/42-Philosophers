@@ -5,60 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: root <root@student.42.fr>                  #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-12-01 09:07:20 by root              #+#    #+#             */
-/*   Updated: 2025-12-01 09:07:20 by root             ###   ########.fr       */
+/*   Created: 2025-12-02 00:03:29 by root              #+#    #+#             */
+/*   Updated: 2025-12-02 00:03:29 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	ft_swap(int *a, int *b)
+static long long int get_target(int idx, t_philo *philos)
 {
-	int	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+    return (get_last_eat_time(&philos[idx].last_eat_time));
 }
 
-static long	get_last_time_idx(int idx, t_philo *philos)
+static void ft_swap(int *a, int *b)
 {
-	return (get_last_eat_time(&philos[idx].last_eat_time));
+    int t;
+
+    t = *a;
+    *a = *b;
+    *b = t;
 }
 
-
-static void	quick_sort_order(int *eat_oder, t_philo *philos, int left,
-		int right)
+static void quick_sort_internal(int *arr, t_philo *philos, int left, int right)
 {
-	int		i;
-	int		j;
-	long	pivot;
+    int i;
+    int j;
+    long long int pivot;
 
-	i = left;
-	j = right;
-	pivot = get_last_time_idx(eat_oder[(left + right) / 2], philos);
-	while (i <= j)
-	{
-		while (get_last_time_idx(eat_oder[i], philos) < pivot)
-			i++;
-		while (get_last_time_idx(eat_oder[j], philos) > pivot)
-			j--;
-		if (i <= j)
-		{
-			ft_swap(&eat_oder[i], &eat_oder[j]);
-			i++;
-			j--;
-		}
-	}
-	if (left < j)
-		quick_sort_order(eat_oder, philos, left, j);
-	if (i < right)
-		quick_sort_order(eat_oder, philos, i, right);
+    i = left;
+    j = right;
+    pivot = get_target(arr[(left + right)/ 2], philos);
+    while (i <= j)
+    {
+        while (get_target(arr[i], philos) < pivot)
+            i++;
+        while (get_target(arr[j], philos) > pivot)
+            j--;
+        if (i <= j)
+        {
+            ft_swap(&arr[i], &arr[j]);
+            i++;
+            j--;
+        }
+    }
+    if (j > left)
+        quick_sort_internal(arr, philos, left, j);
+    if (i < right)
+        quick_sort_internal(arr, philos, i, right);
 }
 
-void	sort_oder(int *eat_oder, t_philo *philos, const int n_philo)
+void quick_sort(int *arr, int size, t_philo *philos)
 {
-	if (n_philo <= 1)
-		return ;
-	quick_sort_order(eat_oder, philos, 0, n_philo - 1);
+    if (size <= 1)
+        return ;
+    quick_sort_internal(arr, philos, 0, size - 1);
 }
