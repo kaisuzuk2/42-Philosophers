@@ -106,7 +106,7 @@ int	main(int argc, char *argv[])
 	if (!parse(argv, &conf))
 		return (EXIT_FAILURE);
 	if (!init(&mon, &conf))
-		return (EXIT_FAILURE);
+		return (EXIT_FATALERR);
 	set_start_time(&mon.start_time);
 	return (execute_thread(&mon));
 }

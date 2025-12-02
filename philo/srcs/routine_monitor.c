@@ -58,7 +58,6 @@ void	*monitor_routine(void *arg)
 	scheduler(mon);
 	while (1)
 	{
-		scheduler(mon);
 		if (mon->conf->n_philo == 1)
 		{
 			print_state(&mon->philos[0], ST_DIED);
@@ -69,6 +68,7 @@ void	*monitor_routine(void *arg)
 		if (check_must_eat(mon->philos, mon->conf->n_philo,
 				mon->conf->must_eat))
 			return (NULL);
+		scheduler(mon);
 		usleep(DF_SLEEP);
 	}
 	return (NULL);
