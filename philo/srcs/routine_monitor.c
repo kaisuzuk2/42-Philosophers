@@ -58,11 +58,6 @@ void	*monitor_routine(void *arg)
 	scheduler(mon);
 	while (1)
 	{
-		if (mon->conf->n_philo == 1)
-		{
-			print_state(&mon->philos[0], ST_DIED);
-			return (NULL);
-		}
 		if (check_timeout_died(mon))
 			return (NULL);
 		if (check_must_eat(mon->philos, mon->conf->n_philo,
