@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 12:46:48 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/12/02 13:29:46 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:39:55 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	init_philos(t_philo *philos, t_table *table, const int philo_num)
 	i = 0;
 	while (i < philo_num)
 	{
-		philos->id = i;
+		philos->id = i + 1;
 		philos->l_fork = i;
 		philos->r_fork = (i + 1) % philo_num;
 		philos->table = table;
