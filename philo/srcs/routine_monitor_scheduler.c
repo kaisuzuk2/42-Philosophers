@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 09:10:24 by root              #+#    #+#             */
-/*   Updated: 2025/12/02 13:31:50 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:42:49 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	set_round(int *eat_oder, t_philo *philos, const int n_philo)
 	{
 		left = (eat_oder[i] - 1 + n_philo) % n_philo;
 		right = (eat_oder[i] + 1) % n_philo;
-		if (!is_can_eat(&philos[left]) && !is_can_eat(&philos[right]))
+		if (!is_can_eat(&philos[left].can_eat) && !is_can_eat(&philos[right].can_eat))
 		{
 			set_can_eat(&philos[eat_oder[i]].can_eat, TRUE);
 			count++;

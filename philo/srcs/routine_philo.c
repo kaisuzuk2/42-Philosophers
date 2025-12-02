@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 13:36:13 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/12/02 13:32:01 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:44:37 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static t_bool	do_think(t_philo *philo)
 	if (is_died(&philo->table->is_died))
 		return (FALSE);
 	print_state(philo, ST_THINK);
-	while (!is_can_eat(philo))
+	while (!is_can_eat(&philo->can_eat))
 	{
 		usleep(DF_SLEEP);
 		if (is_died(&philo->table->is_died))

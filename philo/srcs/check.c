@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 11:37:04 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/11/30 12:45:07 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:44:54 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ t_bool	is_single_philo(t_philo *philo)
 	return (philo->l_fork == philo->r_fork);
 }
 
-t_bool	is_can_eat(t_philo *philo)
+t_bool	is_can_eat(t_atomic_bool *can_eat)
 {
 	t_bool	res;
 
-	pthread_mutex_lock(&philo->can_eat.lock);
-	res = philo->can_eat.is_flg;
-	pthread_mutex_unlock(&philo->can_eat.lock);
+	pthread_mutex_lock(&can_eat->lock);
+	res = can_eat->is_flg;
+	pthread_mutex_unlock(&can_eat->lock);
 	return (res);
 }
