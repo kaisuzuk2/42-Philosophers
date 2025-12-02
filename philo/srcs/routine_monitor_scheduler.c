@@ -13,33 +13,22 @@
 #include "philo.h"
 
 // quick_sort.c
-void	sort_oder(int *eat_oder, t_philo *philos, const int n_philo);
+void quick_sort(int *arr, int size, t_philo *philos);
 
-static void	reset_can_eat(t_monitor *mon)
+static void init_round(int *eat_oder, t_philo *philos, const int size)
 {
-	int	i;
+	int i;
 
 	i = 0;
-	while (i < mon->conf->n_philo)
+	while (i < size)
 	{
-		set_can_eat(&mon->philos[i].can_eat, FALSE);
-		i++;
-	}
-}
-
-static void	init_eat_oder(int *eat_oder, const int n_philo)
-{
-	int	i;
-
-	i = 0;
-	while (i < n_philo)
-	{
+		set_can_eat(&philos[i].can_eat, FALSE);
 		eat_oder[i] = i;
 		i++;
 	}
 }
 
-static void	fair_eat(int *eat_oder, t_philo *philos, const int n_philo)
+static void	set_round(int *eat_oder, t_philo *philos, const int n_philo)
 {
 	const int	max_eat = n_philo / 2;
 	int			left;
@@ -62,10 +51,9 @@ static void	fair_eat(int *eat_oder, t_philo *philos, const int n_philo)
 	}
 }
 
-void	update_fair_eat(t_monitor *mon)
+void	scheduler(t_monitor *mon)
 {
-	reset_can_eat(mon);
-	init_eat_oder(mon->eat_oder, mon->conf->n_philo);
-	sort_oder(mon->eat_oder, mon->philos, mon->conf->n_philo);
-	fair_eat(mon->eat_oder, mon->philos, mon->conf->n_philo);
+	init_round(mon->eat_oder, mon->philos, mon->conf->n_philo);
+	quick_sort(mon->eat_oder, mon->conf->n_philo, mon->philos);
+	set_round(mon->eat_oder, mon->philos, mon->conf->n_philo);
 }

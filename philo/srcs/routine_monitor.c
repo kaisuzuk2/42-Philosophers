@@ -13,7 +13,7 @@
 #include "philo.h"
 
 // routine_monitor_scheduler.c
-void	update_fair_eat(t_monitor *mon);
+void	scheduler(t_monitor *mon);
 
 static t_bool	check_timeout_died(t_monitor *mon)
 {
@@ -55,10 +55,10 @@ void	*monitor_routine(void *arg)
 	t_monitor *mon;
 
 	mon = (t_monitor *)arg;
-	update_fair_eat(mon);
+	scheduler(mon);
 	while (1)
 	{
-		update_fair_eat(mon);
+		scheduler(mon);
 		if (mon->conf->n_philo == 1)
 		{
 			print_state(&mon->philos[0], ST_DIED);
