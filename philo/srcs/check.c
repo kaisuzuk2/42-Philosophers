@@ -6,7 +6,7 @@
 /*   By: kaisuzuk <kaisuzuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 11:37:04 by kaisuzuk          #+#    #+#             */
-/*   Updated: 2025/12/02 13:44:54 by kaisuzuk         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:49:44 by kaisuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_bool	is_done_eating(t_atomic_int *eat_count, const int must_eat)
 
 	pthread_mutex_lock(&eat_count->lock);
 	res = eat_count->value >= must_eat;
+	if (must_eat == 0)
+		res = FALSE;
 	pthread_mutex_unlock(&eat_count->lock);
 	return (res);
 }
